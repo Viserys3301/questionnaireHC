@@ -17,6 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
     <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
+    <script src="eng.js" type="text/javascript"></script>
+    <script src="kaz.js" type="text/javascript"></script>
+    <script src="rus.js" type="text/javascript"></script>
 
     <link rel="shortcut icon" href="images/ico.png" type="image/png">
 
@@ -1209,15 +1212,15 @@
 <body>
 
 <div class="text-center" style="padding:20px;">
-    <input type="button" id="rep" value="Kaz" class="btn btn-info ">
-    <input type="button" id="rep" value="Rus" class="btn btn-info ">
-    <input type="button" id="rep" value="Eng" class="btn btn-info ">
+    <input type="button" id="rep" value="Kaz" class="btn btn-info " onclick="changeToKazLang()">
+    <input type="button" id="rep" value="Rus" class="btn btn-info " onclick="changeToRusLang()">
+    <input type="button" id="rep" value="Eng" class="btn btn-info " onclick="changeToEngLang()">
 </div>
 
 <div class="selected" id="selector">
     <h3 id="Sign" style="display: none">0</h3>
-    <a href="#" class="button6" onclick="selectKT()">КТ</a>
-    <a href="MRT.html" class="button6" >МРТ</a>
+    <a href="#" class="button6" onclick="selectKT()" id="buttonCT">КТ</a>
+    <a href="MRT.html" class="button6" id="buttonMRT">МРТ</a>
 <!--    onclick="selectMRT()"-->
 </div>
 
