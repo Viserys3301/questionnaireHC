@@ -377,6 +377,7 @@
             outline: none !important;
         }
         #IIN{
+            height: 55px;
             border: 2px solid black;
             border-radius: 5px;
             display: block;
@@ -537,6 +538,7 @@
         }
 /*------*/
         #BirthOfDateDay{
+            height: 55px;
             border: 2px solid black;
             border-radius: 5px;
             display: block;
@@ -550,6 +552,7 @@
             outline: none !important;
         }
         #lastnameNameMonth{
+            height: 55px;
             border: 2px solid black;
             border-radius: 5px;
             display: block;
@@ -563,6 +566,7 @@
             outline: none !important;
         }
         #lastnameNameYear{
+            height: 55px;
             border: 2px solid black;
             border-radius: 5px;
             display: block;
@@ -595,6 +599,7 @@
 
         /*------*/
         #PatWeight{
+            height: 55px;
             border: 2px solid black;
             border-radius: 5px;
             display: block;
@@ -1205,9 +1210,16 @@
     <textarea id="lastnameName" placeholder="Отчество пациента" ></textarea>
 
 
-    <textarea id="BirthOfDateDay" placeholder="День" ></textarea>
-    <textarea id="lastnameNameMonth" placeholder="Месяц" ></textarea>
-    <textarea id="lastnameNameYear" placeholder="Год" ></textarea>
+<!--    <textarea id="BirthOfDateDay" placeholder="День" ></textarea>-->
+<!--    <textarea id="lastnameNameMonth" placeholder="Месяц" ></textarea>-->
+<!--    <textarea id="lastnameNameYear" placeholder="Год" ></textarea>-->
+
+    <input type="tel" id="BirthOfDateDay" placeholder="День">
+
+    <input type="tel" id="lastnameNameMonth" placeholder="Месяц">
+
+    <input type="tel" id="lastnameNameYear" placeholder="Год">
+
     <!--    <input type="text" id="BirthOfDate" onfocus="(this.type='date')" placeholder="Дата рождения пациента"/>-->
 
 <!--    жалобы-->
@@ -1215,8 +1227,10 @@
 
 
 
-    <textarea id="IIN"  placeholder="ИИН пациента"></textarea>
-    <textarea id="PatWeight"  placeholder="Вес:"></textarea>
+<!--    <textarea id="IIN"  placeholder="ИИН пациента"></textarea>-->
+    <input type="tel" id="IIN" placeholder="ИИН пациента">
+<!--    <textarea id="PatWeight"  placeholder="Вес:"></textarea>-->
+    <input type="tel" id="PatWeight"  placeholder="Вес:">
     <h5 id="jhalobyText">Исследование </h5>
     <select id="jhalobyValue">
         <option>Головной мозг</option>
