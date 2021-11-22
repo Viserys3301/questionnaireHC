@@ -1044,6 +1044,9 @@
                 var r11 = window.document.getElementById("contrastingYes");
                 var r11_1 = window.document.getElementById("contrastingNo");
 
+                var checkSign = window.document.getElementById("Sign").textContent
+
+
                 const firstTextEl = document.getElementById('firstText');
                 const secondTextEl = document.getElementById('secondText');
                 const thirdTextEl = document.getElementById('thirdText');
@@ -1056,12 +1059,20 @@
                 const diabetesTextEl = document.getElementById('diabetesText');
                 const contrastingTextEl = document.getElementById('contrastingText');
 
+                const contrast = document.getElementById('contrastCheckBoxYES');
+
                 var el = document.getElementById('mydiv');
                 var d = new Date();
                 el.innerHTML = d;
 
+
+                if (!contrast.checked){
+                    window.document.getElementById("fourthCheckContrast").checked = true;
+                }
+                // 19 20 21 mamo
+
                 if(r1.checked && r2.checked && r3.checked && r4.checked && (r5.checked || r5_1.checked) && (r6.checked || r6_1.checked) && (r7.checked || r7_1.checked) && (r8.checked || r8_1.checked) &&
-                    (r9.checked || r9_1.checked) && (r10.checked || r10_1.checked) && (r11.checked || r11_1.checked) && r4_1.checked){
+                    (r9.checked || r9_1.checked) && (r10.checked || r10_1.checked) && (r11.checked || r11_1.checked) && r4_1.checked && checkSign=="1"){
                     return true;
                 }
                 else {
@@ -1186,6 +1197,12 @@
             document.getElementById('lastNameNameOpek').style.display='none';
         }
     </script>
+
+    <script>
+        function checkSign(){
+            document.getElementById('Sign').textContent="1";
+        }
+    </script>
 </head>
 <body>
 
@@ -1196,6 +1213,7 @@
 </div>
 
 <div class="selected" id="selector">
+    <h3 id="Sign" style="display: none">0</h3>
     <a href="#" class="button6" onclick="selectKT()">КТ</a>
     <a href="MRT.html" class="button6" >МРТ</a>
 <!--    onclick="selectMRT()"-->
@@ -1215,6 +1233,7 @@
 <!--    <textarea id="BirthOfDateDay" placeholder="День" ></textarea>-->
 <!--    <textarea id="lastnameNameMonth" placeholder="Месяц" ></textarea>-->
 <!--    <textarea id="lastnameNameYear" placeholder="Год" ></textarea>-->
+
 
     <input type="tel" id="BirthOfDateDay" placeholder="День">
 
@@ -1406,14 +1425,14 @@
                     <!--Позвоночник-->
                     <select class="select-css" id="selectedValueHrebet" style="display: none">
                         <option id="opt7">Боль</option>
-                        <option id="opt7_1">Травма (локализовать)</option>
+                        <option id="opt7_1">Травма</option>
                         <option id="opt7_2">Грыжа, протрузия</option>
                         <option id="opt7_3">Другое</option>
                     </select>
                     <!--Суставы-->
                     <select class="select-css" id="selectedValueSust" style="display: none">
                         <option id="opt8">Боль</option>
-                        <option id="opt8_1">Травма локализовать</option>
+                        <option id="opt8_1">Травма</option>
                         <option id="opt8_2">Другое</option>
                     </select>
                 </td>
@@ -1563,7 +1582,7 @@
             </tr>
 
         </table>
-        <td>    <div id="canvasDiv"></div>
+        <td>    <div id="canvasDiv" onclick="checkSign()"></div>
             <script type="text/javascript">
                 drawingApp.init();
             </script>

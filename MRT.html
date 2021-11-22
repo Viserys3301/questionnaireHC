@@ -1102,7 +1102,7 @@
                 var r17_1 = window.document.getElementById("DvePoloskiNo");
 
 
-
+                var checkSign = window.document.getElementById("Sign").textContent
 
                 const thirdTextEl = document.getElementById('thirdText');
                 const MRTtextEl = document.getElementById('MRTtext');
@@ -1114,15 +1114,23 @@
                 const diabetesTextEl = document.getElementById('diabetesText');
                 const contrastingTextEl = document.getElementById('contrastingText');
 
+                const contrast = document.getElementById('contrastCheckBoxYES');
+
+                if (!contrast.checked){
+                    window.document.getElementById("fourthCheckContrast").checked = true;
+                }
+
+
                 var el = document.getElementById('mydiv');
                 var d = new Date();
                 el.innerHTML = d;
 
 
+
                 if( r3.checked && r4.checked && (r5.checked || r5_1.checked) &&
                     (r6.checked || r6_1.checked) && (r7.checked || r7_1.checked) && (r8.checked || r8_1.checked) &&
                     (r9.checked || r9_1.checked) && (r10.checked || r10_1.checked) && (r11.checked || r11_1.checked) &&
-                    (r15.checked || r15_1.checked) && (r16.checked || r16_1.checked) && (r17.checked || r17_1.checked) ){
+                    (r15.checked || r15_1.checked) && (r16.checked || r16_1.checked) && (r17.checked || r17_1.checked) && r4_1.checked  && checkSign=="1"){
                     return true;
                 }
                 else {
@@ -1235,10 +1243,17 @@
             document.getElementById('lastNameNameOpek').style.display='none';
         }
     </script>
+
+    <script>
+        function checkSign(){
+            document.getElementById('Sign').textContent="1";
+        }
+    </script>
 </head>
 <body>
 
 <div class="text-center" style="padding:20px;">
+    <h3 id="Sign" style="display: none">0</h3>
     <input type="button" id="rep" value="Kaz" class="btn btn-info ">
     <input type="button" id="rep" value="Rus" class="btn btn-info ">
     <input type="button" id="rep" value="Eng" class="btn btn-info ">
@@ -1392,21 +1407,21 @@
                     <h5 id="selectedTextID" style="display: none"></h5>
                     <!--ГОЛОВНОЙ МОЗГ-->
                     <select class="select-css" id="selectedValueHead" style="display: none">
-                        <option id="opt1">Боль(локализовать)</option>
+                        <option id="opt1">Боль</option>
                         <option id="opt1_1">Головокружение</option>
                         <option id="opt1_2">Травма</option>
                         <option id="opt1_3">Другое</option>
                     </select>
                     <!--Пазухи носа-->
                     <select class="select-css" id="selectedValueNous" style="display: none">
-                        <option id="opt2">Боль(локализовать)</option>
+                        <option id="opt2">Боль</option>
                         <option id="opt2_1">Выделения</option>
                         <option id="opt2_2">Искривление носовой перегородки</option>
                         <option id="opt2_3">Другое</option>
                     </select>
                     <!--Мягкие ткани шеи:-->
                     <select class="select-css" id="selectedValueLight" style="display: none">
-                        <option id="opt3">Боль(локализовать)</option>
+                        <option id="opt3">Боль</option>
                         <option id="opt3_1">Першение</option>
                         <option id="opt3_2">«ком в горле»</option>
                         <option id="opt3_3">Образование</option>
@@ -1414,7 +1429,7 @@
                     </select>
                     <!--Грудная клетка-->
                     <select class="select-css" id="selectedValueBoobs" style="display: none">
-                        <option id="opt4">Боль(локализовать)</option>
+                        <option id="opt4">Боль</option>
                         <option id="opt4_1">Кашель</option>
                         <option id="opt4_2">Трудно дышать</option>
                         <option id="opt4_3">Травма</option>
@@ -1425,7 +1440,7 @@
                     </select>
                     <!--Органы брюшной полости-->
                     <select class="select-css" id="selectedValueOBP" style="display: none">
-                        <option id="opt5">Боль(локализовать)</option>
+                        <option id="opt5">Боль</option>
                         <option id="opt5_1">Травма</option>
                         <option id="opt5_2">Образование</option>
                         <option id="opt5_3">Камни в почках</option>
@@ -1434,21 +1449,21 @@
                     </select>
                     <!--Органы малого таза-->
                     <select class="select-css" id="selectedValueOMT" style="display: none">
-                        <option id="opt6">Боль(локализовать)</option>
+                        <option id="opt6">Боль</option>
                         <option id="opt6_1">Образование</option>
                         <option id="opt6_2">Воспаление</option>
                         <option id="opt6_3">Другое</option>
                     </select>
                     <!--Позвоночник-->
                     <select class="select-css" id="selectedValueHrebet" style="display: none">
-                        <option id="opt7">Боль(локализовать)</option>
-                        <option id="opt7_1">Травма (локализовать)</option>
+                        <option id="opt7">Боль</option>
+                        <option id="opt7_1">Травма</option>
                         <option id="opt7_2">Грыжа, протрузия</option>
                         <option id="opt7_3">Другое</option>
                     </select>
                     <!--Суставы-->
                     <select class="select-css" id="selectedValueSust" style="display: none">
-                        <option id="opt8">Боль(локализовать)</option>
+                        <option id="opt8">Боль</option>
                         <option id="opt8_1">Травма локализовать</option>
                         <option id="opt8_2">Другоеь</option>
                     </select>
@@ -1604,7 +1619,7 @@
             </tr>
 
         </table>
-        <td>    <div id="canvasDiv"></div>
+        <td>    <div id="canvasDiv" onclick="checkSign()"></div>
             <script type="text/javascript" src="html5-canvas-drawing-app.js"></script>
             <script type="text/javascript">
                 drawingApp.init();
