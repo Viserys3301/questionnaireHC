@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Анкета КТ</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="This ">
+    <meta charset="UTF-8">
+    <meta name="author" content="Code With Mark">
+    <meta name="authorUrl" content="http://codewithmark.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+    <script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script>
+
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 22px;
+
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .invoice-box.rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box.rtl table {
+            text-align: right;
+        }
+
+        .invoice-box.rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+
+        /*------*/
+        @keyframes click-wave {
+            0% {
+                height: 40px;
+                width: 40px;
+                opacity: 0.35;
+                position: relative;
+            }
+            100% {
+                height: 200px;
+                width: 200px;
+                margin-left: -80px;
+                margin-top: -80px;
+                opacity: 0;
+            }
+        }
+
+        .option-input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            position: relative;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            transition: all 0.15s ease-out 0s;
+            background: #cbd1d8;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 0.5rem;
+            outline: none;
+            position: relative;
+            z-index: 1000;
+            font-family: 'Roboto', sans-serif;
+        }
+        .option-input:hover {
+            background: #9faab7;
+        }
+        .option-input:checked {
+            background: #8A2BE2;
+        }
+        .option-input:checked::before {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            content: '✔';
+            display: inline-block;
+            font-size: 26.66667px;
+            text-align: center;
+            line-height: 40px;
+        }
+        .option-input:checked::after {
+            -webkit-animation: click-wave 0.65s;
+            -moz-animation: click-wave 0.65s;
+            animation: click-wave 0.65s;
+            background: #8A2BE2;
+            content: '';
+            display: block;
+            position: relative;
+            z-index: 100;
+        }
+        .option-input.radio {
+            border-radius: 50%;
+        }
+        .option-input.radio::after {
+            border-radius: 50%;
+        }
+        /*------*/
+
+        .Toolbar {
+            float: left;
+            font-family: 'Trebuchet MS';
+            font-size: 14px;
+            font-variant: small-caps;
+            text-align: center;
+            background: #F2F7FE;
+            padding: 10px 15px 3px 10px;
+            margin-bottom: 1px;
+            margin-right: 1px;
+            border: 1px solid #7B899B;
+        }
+
+        .Toolbar button {
+            font-variant: normal;
+            font-size: 12px;
+        }
+
+        .CanvasContainer {
+            clear: both;
+        }
+
+        canvas {
+            border: 1px solid #7B899B;
+        }
+
+        img {
+            padding: 2px;
+            border: 2px solid #F2F7FE;
+        }
+
+        img:hover {
+            border: 2px groove #E4F0FE;
+            background: white;
+        }
+
+
+        img.Selected {
+            border: 2px groove #E4F0FE;
+        }
+
+        #savedCopyContainer {
+            display: none;
+        }
+
+        #savedCopyContainer img {
+            width: 250px;
+            height: 150px;
+        }
+        /*---SELECT---*/
+        .select-css {
+            margin-top: 5px;
+            display: block;
+            font-size: 16px;
+            font-family: sans-serif;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.3;
+            padding: .6em 1.4em .5em .8em; width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+            border-radius: .5em;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'), linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+        .select-css::-ms-expand { display: none; }
+        .select-css:hover { border-color: #888; }
+        .select-css:focus { border-color: #aaa;
+            box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+            box-shadow: 0 0 0 3px -moz-mac-focusring;
+            color: #222;
+            outline: none;
+        }
+        .select-css option { font-weight:normal; }
+        *[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
+            background-position: left .7em top 50%, 0 0;
+            padding: .6em .8em .5em 1.4em;
+        }
+        /*------*/
+        #rep2{
+            margin-bottom: 22px;
+        }
+
+        /*------*/
+        a.button6 {
+            position: relative;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 0 -1px 1px #cc5500;
+            user-select: none;
+            padding: .8em 2em;
+            outline: none;
+            border-radius: 1px;
+            background: #fc6719;
+            background-size: 100% 100%, auto;
+            background-position: 50% 50%;
+            box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00, #cc7722 0 0 0 1px, #000 0 10px 15px -10px;
+            transition: 0.2s;
+        }
+        a.button6:hover {
+            background-size: 140% 100%, auto;
+        }
+        a.button6:active {
+            top: 1px;
+            color: #ffdead;
+            box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00, #cc7722 0 0 0 1px, 0 10px 10px -9px #000;
+        }
+        /*------*/
+        #selector{
+            display: block;
+            margin-left: 40%;
+            margin-top: 20%;
+        }
+        /*------*/
+        #container_content{
+            display: none;
+        }
+        /*------*/
+        #videoCheck{
+            display: none;
+            margin-left: 40%;
+        }
+        /*------*/
+        #CameraOrHand{
+            display: none;
+            margin-left: 35%;
+            margin-top: 20%;
+        }
+        /*------*/
+        #patientDataType{
+            display: none;
+        }
+        /*------*/
+        #firstName{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-left: 20px;
+        }
+        #firstName:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #secondName{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #secondName:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #lastnameName{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #lastnameName:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #BirthOfDate{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #BirthOfDate:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #IIN{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #IIN:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #OpekunValue{
+            margin-top: 20px;
+        }
+        #firstNameOpek{
+            display: none;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #firstNameOpek:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #secondNameOpek{
+            display: none;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #secondNameOpek:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #lastNameNameOpek{
+            display: none;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #lastNameNameOpek:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #contrastValue{
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #contrastCheckBoxYES{
+            margin-left: 20px;
+        }
+        #contrastCheckBoxNO{
+            margin-left: 20px;
+        }
+        #savePatDataButton{
+            margin-top: 20px;
+            margin-left: 47%;
+            font-weight: bold;
+            color: white;
+            padding: .8em 2em;
+            text-decoration: none;
+            text-shadow: 0 -1px 1px #cc5500;
+            user-select: none;
+            padding: .8em 2em;
+            outline: none;
+            border-radius: 1px;
+            background:#fc6719;
+            background-size: 100% 100%, auto;
+            background-position: 50% 50%;
+            box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00, #cc7722 0 0 0 1px, #000 0 10px 15px -10px;
+            transition: 0.2s;
+        }
+        #savePatDataButton:hover{background-size: 140% 100%, auto;}
+        #savePatDataButton:active{
+            top: 1px;
+            color: #ffdead;
+            box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00, #cc7722 0 0 0 1px, 0 10px 10px -9px #000;
+        }
+/*------*/
+        #selectedTextID{
+            display: none;
+        }
+/*------*/
+        #window{
+            width: 350px;
+            height: 150px;
+            margin: 40px auto;
+            background-color: white;
+            border: 1px solid black;
+            border-radius:  15px;
+            z-index: 150;
+            display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .form{
+            width: 275px;
+            margin: 0px auto 20px auto;
+            text-align: center;
+        }
+        .input{
+            width: 260px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .close{
+            margin: 10px 0px 0px 320px;
+            cursor: pointer;
+            border: 1px solid gray;
+            padding: 2px;
+            background: gray;
+        }
+        .close:hover{
+            background: white;
+        }
+        #gray{
+            background-color: rgba(1,1,1,0.75);
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: none;
+            z-index: 100;
+        }
+        #saveButton{
+            cursor: pointer;
+        }
+        #saveButton:hover{
+            cursor: pointer;
+            background-color: #7B68EE;
+        }
+        #profileName{
+            border-color: #7B68EE;
+        }
+/*------*/
+        #final_text{
+            margin-top: 20px;
+        }
+/*------*/
+        #cancelButton{
+            display: none;
+        }
+/*------*/
+        #rep{
+            background:#fc6719;
+        }
+/*------*/
+        #BirthOfDateDay{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 20%;
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+        #BirthOfDateDay:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #lastnameNameMonth{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 20%;
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+        #lastnameNameMonth:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        #lastnameNameYear{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 20%;
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+        #lastnameNameYear:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+
+
+        /*------*/
+        #jhalobyText{
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+        #jhalobyValue{
+            background-color: white;
+            border: 2px solid black;
+            height: 50px;
+            width: 75%;
+            margin-top: 20px;
+            margin-left: 20px;
+            display: inline-block;
+        }
+
+        /*------*/
+        #PatWeight{
+            border: 2px solid black;
+            border-radius: 5px;
+            display: block;
+            width: 97%;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        #PatWeight:focus{
+            border-color: #8A2BE2;
+            outline: none !important;
+        }
+        /*------*/
+    </style>
+
+    <!--    &#45;&#45;Жаолбы-->
+    <script type="text/javascript">
+
+        function checkJalobu(){
+            var jaloba = window.document.getElementById("jhalobyValue").value;
+
+            if(jaloba=="Головной мозг"){
+                window.document.getElementById('selectedValueHead').style.display='block';
+            }
+            if(jaloba=="Пазухи носа"){
+                window.document.getElementById('selectedValueNous').style.display='block';
+            }
+            if(jaloba=="Мягкие ткани, шеи"){
+                window.document.getElementById('selectedValueLight').style.display='block';
+            }
+            if(jaloba=="Грудная клетка"){
+                window.document.getElementById('selectedValueBoobs').style.display='block';
+            }
+            if(jaloba=="Органы брюшной полости"){
+                window.document.getElementById('selectedValueOBP').style.display='block';
+            }
+            if(jaloba=="Органы малого таза"){
+                window.document.getElementById('selectedValueOMT').style.display='block';
+            }
+            if(jaloba=="Позвоночник"){
+                window.document.getElementById('selectedValueHrebet').style.display='block';
+            }
+            if(jaloba=="Суставы"){
+                window.document.getElementById('selectedValueSust').style.display='block';
+            }
+        }
+    </script>
+
+
+
+
+    <script type="text/javascript" src="html5-canvas-drawing-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+    <script type="text/javascript">
+
+
+            // function to_image(){
+            //     var canvas = document.getElementById("canvasDiv");
+            //     document.getElementById("images").src = canvas.toDataURL();
+            // }
+
+
+                $(document).ready(function($)
+                {
+                    $(document).on('click', '.btn_print', function(event)
+                    {
+
+                        if (checkRadio()==true){
+                            hideElements();
+                            event.preventDefault();
+
+                            //credit : https://ekoopmans.github.io/html2pdf.js
+
+                            var element = document.getElementById('container_content');
+
+                            //easy
+                            //html2pdf().from(element).save();
+                            //custom file name
+                            //html2pdf().set({filename: 'code_with_mark_'+js.AutoCode()+'.pdf'}).from(element).save();
+
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+
+                            today = mm + '/' + dd + '/' + yyyy;
+
+
+                            var fileName = "КТ_" + window.document.getElementById('firstName').value + "_" +
+                                           window.document.getElementById('secondName').value + "_" +
+                                           window.document.getElementById('lastnameName').value + "_" + today;
+                            //more custom settings  + " " +  + " " + ;
+                            var opt =
+                                {
+                                    margin:       0,
+                                    filename:     fileName+js.AutoCode()+'.pdf',
+                                    image:        { type: 'jpeg', quality: 0.98 },
+                                    html2canvas:  { scale: 2 },
+                                    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                                };
+                            // New Promise-based usage:
+                            html2pdf().set(opt).from(element).save();
+                            profile('block');
+                        }
+                    });
+                });
+
+
+
+
+
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        //////////////////////////////////////////////////////////////////CANAVS
+        var canvas;
+        var context;
+
+        window.onload = function() {
+            canvas = document.getElementById("drawingCanvas");
+            context = canvas.getContext("2d");
+
+            // Подключаем требуемые для рисования события
+            canvas.onmousedown = startDrawing;
+            canvas.onmouseup = stopDrawing;
+            canvas.onmouseout = stopDrawing;
+            canvas.onmousemove = draw;
+        }
+        var previousColorElement;
+
+
+        // Отслеживаем элемент <img> для толщины линии, по которому ранее щелкнули
+        var previousThicknessElement;
+
+
+        function startDrawing(e) {
+            // Начинаем рисовать
+            isDrawing = true;
+
+            // Создаем новый путь (с текущим цветом и толщиной линии)
+            context.beginPath();
+
+            // Нажатием левой кнопки мыши помещаем "кисть" на холст
+            context.moveTo(e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop);
+        }
+        function draw(e) {
+            if (isDrawing == true)
+            {
+                // Определяем текущие координаты указателя мыши
+                var x = e.pageX - canvas.offsetLeft;
+                var y = e.pageY - canvas.offsetTop;
+
+                // Рисуем линию до новой координаты
+                context.lineTo(x, y);
+                context.stroke();
+            }
+        }
+        function stopDrawing() {
+            isDrawing = false;
+        }
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        var url = canvas.toDataURL("image/jpeg");
+        window.location = canvas.toDataURL();
+        function saveCanvas() {
+            // Находим элемент <img>
+            var imageCopy = document.getElementById("savedImageCopy");
+
+            // Отображаем данные холста в элементе <img>
+            imageCopy.src = canvas.toDataURL();
+
+            // Показываем элемент <div>, делая изображение видимым
+            // делая изображение видимым
+            var imageContainer = document.getElementById("savedCopyContainer");
+            imageContainer.style.display = "block";
+        }
+        ////////////////////////////////////////////////////////////////////////
+    </script>
+
+    <script type="text/javascript">
+        function selectKT(){
+            window.document.getElementById("selector").style.display = "none";
+            window.document.getElementById("CameraOrHand").style.display = "none";
+            selectedHand()
+        }
+        function selectMRT(){
+            window.document.getElementById("selector").style.display = "none";
+            window.document.getElementById("CameraOrHand").style.display = "block";
+        }
+        function selectedHand(){
+            window.document.getElementById("CameraOrHand").style.display = "none";
+            window.document.getElementById("patientDataType").style.display = "block";
+        }
+        function selectedAuto(){
+            alert('Мы не Google , разработка в процессе')
+            // window.document.getElementById("CameraOrHand").style.display = "none";
+            // window.document.getElementById("videoCheck").style.display = "block";
+        }
+        function loadDataInHand(){
+            window.document.getElementById("PregnancyNo").checked = true;
+            window.document.getElementById("iodineNo").checked = true;
+            window.document.getElementById("AllergyNo").checked = true;
+            window.document.getElementById("PathologyNo").checked = true;
+            window.document.getElementById("glandsNo").checked = true;
+            window.document.getElementById("diabetesNo").checked = true;
+            window.document.getElementById("contrastingNo").checked = true;
+
+            checkJalobu();
+
+            var patFirstName = window.document.getElementById("firstName").value;
+            var patSecondName = window.document.getElementById("secondName").value;
+            var patLastName = window.document.getElementById("lastnameName").value;
+
+            var patFirstName = window.document.getElementById("firstName").value;
+            var patSecondName = window.document.getElementById("secondName").value;
+            var patLastName = window.document.getElementById("lastnameName").value;
+            var patBirthOfDate = window.document.getElementById("BirthOfDateDay").value + "-" + window.document.getElementById("lastnameNameMonth").value + "-" + window.document.getElementById("lastnameNameYear").value;
+            var patIIN = window.document.getElementById("IIN").value;
+            var patPatWeight = window.document.getElementById("PatWeight").value;
+
+            var firstNameOpek = window.document.getElementById("firstNameOpek").value;
+            var secondNameOpek = window.document.getElementById("secondNameOpek").value;
+            var lastNameNameOpek = window.document.getElementById("lastNameNameOpek").value;
+
+            var OpekYES = window.document.getElementById("OpekYES");
+            var OpekNO = window.document.getElementById("OpekNO");
+
+            var contrastCheckBoxYES = window.document.getElementById("contrastCheckBoxYES");
+            var contrastCheckBoxNO = window.document.getElementById("contrastCheckBoxNO");
+
+
+            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patIIN == "" ||
+                (!OpekYES.checked && !OpekNO.checked) ||(!contrastCheckBoxYES.checked && !contrastCheckBoxNO.checked) ){
+                cancelFunc();
+            }else {
+
+                if(OpekYES.checked){
+                    window.document.getElementById("EnteredName").textContent = patFirstName + " " + patSecondName + " " + patLastName;
+                    window.document.getElementById("EnteredFamilyName").textContent = firstNameOpek + " " + secondNameOpek + " " + lastNameNameOpek;
+                    window.document.getElementById("EnteredBirthOfDate").textContent = patBirthOfDate;
+                    window.document.getElementById("EnteredIIN").textContent = patIIN;
+                    window.document.getElementById("EnteredWeight").textContent = patPatWeight;
+                    window.document.getElementById("patientDataType").style.display = "none";
+                    window.document.getElementById("container_content").style.display = "block";
+                }
+                if (!OpekYES.checked){
+                    window.document.getElementById("EnteredName").textContent = patFirstName + " " + patSecondName + " " + patLastName;
+                    window.document.getElementById("EnteredFamilyName").style.display='none';
+                    window.document.getElementById("EnteredFamilyNameText").style.display='none';
+                    window.document.getElementById("EnteredBirthOfDate").textContent = patBirthOfDate;
+                    window.document.getElementById("EnteredIIN").textContent = patIIN;
+
+                    window.document.getElementById("patientDataType").style.display = "none";
+                    window.document.getElementById("container_content").style.display = "block";
+                }
+                if (!contrastCheckBoxYES.checked){
+                    window.document.getElementById("activeContrast").style.display='none';
+                    window.document.getElementById("activeContrast2").style.display='none';
+                    window.document.getElementById("activeContrast3").style.display='none';
+                }
+
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function hideElements(){
+            window.document.getElementById("rep1").style.visibility='hidden';
+            window.document.getElementById("rep2").style.visibility='hidden';
+
+            var head = window.document.getElementById('selectedValueHead');
+            var nous = window.document.getElementById('selectedValueNous');
+            var Light = window.document.getElementById('selectedValueLight');
+            var Boobs = window.document.getElementById('selectedValueBoobs');
+            var OBP = window.document.getElementById('selectedValueOBP');
+            var OMT = window.document.getElementById('selectedValueOMT');
+            var Hrebet = window.document.getElementById('selectedValueHrebet');
+            var Sust = window.document.getElementById('selectedValueSust');
+
+            var text = window.document.getElementById('selectedTextID');
+
+            if (head.style.display!='none'){
+                text.textContent = head.value;
+                head.style.display='none';
+                text.style.display='block';
+            }
+
+            if (nous.style.display!='none'){
+                text.textContent = nous.value;
+                nous.style.display='none';
+                text.style.display='block';
+
+            }
+            if (Light.style.display!='none'){
+                text.textContent = Light.value;
+                Light.style.display='none';
+                text.style.display='block';
+            }
+            if (Boobs.style.display!='none'){
+                text.textContent = Boobs.value;
+                Boobs.style.display='none';
+                text.style.display='block';
+            }
+            if (OBP.style.display!='none'){
+                text.textContent = OBP.value;
+                OBP.style.display='none';
+                text.style.display='block';
+            }
+            if (OMT.style.display!='none'){
+                text.textContent = OMT.value;
+                OMT.style.display='none';
+                text.style.display='block';
+            }
+            if (Hrebet.style.display!='none'){
+                text.textContent = Hrebet.value;
+                Hrebet.style.display='none';
+                text.style.display='block';
+            }
+            if (Sust.style.display!='none'){
+                text.textContent = Sust.value;
+                Sust.style.display='none';
+                text.style.display='block';
+            }
+
+
+
+            window.document.getElementById("selectedTextID").style.display='block';
+
+        }
+    </script>
+
+
+
+
+<!--    <script type="text/javascript">-->
+<!--        (function() {-->
+<!--            var width = 320;-->
+<!--            var height = 0;-->
+<!--            var streaming = false;-->
+<!--            var video = null;-->
+<!--            var canvas = null;-->
+<!--            var photo = null;-->
+<!--            var startbutton = null;-->
+
+<!--            function startup() {-->
+<!--                video = document.getElementById('video');-->
+<!--                canvas = document.getElementById('canvas');-->
+<!--                photo = document.getElementById('photo');-->
+<!--                startbutton = document.getElementById('startbutton');-->
+
+<!--                navigator.mediaDevices.getUserMedia({video: true, audio: false})-->
+<!--                    .then(function(stream) {-->
+<!--                        video.srcObject = stream;-->
+<!--                        video.play();-->
+<!--                    })-->
+<!--                    .catch(function(err) {-->
+<!--                        console.log("An error occurred: " + err);-->
+<!--                    });-->
+
+<!--                video.addEventListener('canplay', function(ev){-->
+<!--                    if (!streaming) {-->
+<!--                        height = video.videoHeight / (video.videoWidth/width);-->
+<!--                        if (isNaN(height)) {-->
+<!--                            height = width / (4/3);-->
+<!--                        }-->
+<!--                        video.setAttribute('width', width);-->
+<!--                        video.setAttribute('height', height);-->
+<!--                        canvas.setAttribute('width', width);-->
+<!--                        canvas.setAttribute('height', height);-->
+<!--                        streaming = true;-->
+<!--                    }-->
+<!--                }, false);-->
+<!--                startbutton.addEventListener('click', function(ev){-->
+<!--                    takepicture();-->
+<!--                    ev.preventDefault();-->
+<!--                }, false);-->
+<!--                clearphoto();-->
+<!--            }-->
+
+<!--            function clearphoto() {-->
+<!--                var context = canvas.getContext('2d');-->
+<!--                context.fillStyle = "#AAA";-->
+<!--                context.fillRect(0, 0, canvas.width, canvas.height);-->
+
+<!--                var data = canvas.toDataURL('image/png');-->
+<!--                photo.setAttribute('src', data);-->
+<!--            }-->
+
+<!--            function takepicture() {-->
+<!--                var context = canvas.getContext('2d');-->
+<!--                if (width && height) {-->
+<!--                    canvas.width = width;-->
+<!--                    canvas.height = height;-->
+<!--                    context.drawImage(video, 0, 0, width, height);-->
+
+<!--                    var data = canvas.toDataURL('image/png');-->
+<!--                    photo.setAttribute('src', data);-->
+<!--                } else {-->
+<!--                    clearphoto();-->
+<!--                }-->
+<!--            }-->
+<!--            window.addEventListener('load', startup, false);-->
+<!--        })();-->
+<!--    </script>-->
+
+        <script>
+            function checkRadio(){
+                window.document.getElementById("thirdText").style.backgroundColor="#fc6719";
+                window.document.getElementById("thirdText2").style.backgroundColor="#fc6719";
+                window.document.getElementById("secondText").style.backgroundColor="#fc6719";
+                window.document.getElementById("secondText2").style.backgroundColor="#fc6719";
+                window.document.getElementById("firstText").style.backgroundColor="#fc6719";
+                window.document.getElementById("firstText2").style.backgroundColor="#fc6719";
+                window.document.getElementById("MRTtext").style.color="black";
+                window.document.getElementById("MRTtextContrast").style.color="black";
+
+                var r1 = window.document.getElementById("firstCheck");
+                var r2 = window.document.getElementById("secondCheck");
+                var r3 = window.document.getElementById("thirdCheck");
+                var r4 = window.document.getElementById("fourthCheck");
+                var r4_1 = window.document.getElementById("fourthCheckContrast");
+                var r12 = window.document.getElementById("MRTtext");
+
+
+                var r5 = window.document.getElementById("PregnancyYes");
+                var r5_1 = window.document.getElementById("PregnancyNo");
+                var r6 = window.document.getElementById("iodineYes");
+                var r6_1 = window.document.getElementById("iodineNo");
+                var r7 = window.document.getElementById("AllergyYes");
+                var r7_1 = window.document.getElementById("AllergyNo");
+                var r8 = window.document.getElementById("PathologyYes");
+                var r8_1 = window.document.getElementById("PathologyNo");
+                var r9 = window.document.getElementById("glandsYes");
+                var r9_1 = window.document.getElementById("glandsNo");
+                var r10 = window.document.getElementById("diabetesYes");
+                var r10_1 = window.document.getElementById("diabetesNo");
+                var r11 = window.document.getElementById("contrastingYes");
+                var r11_1 = window.document.getElementById("contrastingNo");
+
+                const firstTextEl = document.getElementById('firstText');
+                const secondTextEl = document.getElementById('secondText');
+                const thirdTextEl = document.getElementById('thirdText');
+                const MRTtextEl = document.getElementById('MRTtext');
+                const PregnancyTextEl = document.getElementById('PregnancyText');
+                const iodineTextEl = document.getElementById('iodineText');
+                const AllergyTextEl = document.getElementById('AllergyText');
+                const PathologyTextEl = document.getElementById('PathologyText');
+                const glandsTextEl = document.getElementById('glandsText');
+                const diabetesTextEl = document.getElementById('diabetesText');
+                const contrastingTextEl = document.getElementById('contrastingText');
+
+                var el = document.getElementById('mydiv');
+                var d = new Date();
+                el.innerHTML = d;
+
+                if(r1.checked && r2.checked && r3.checked && r4.checked && (r5.checked || r5_1.checked) && (r6.checked || r6_1.checked) && (r7.checked || r7_1.checked) && (r8.checked || r8_1.checked) &&
+                    (r9.checked || r9_1.checked) && (r10.checked || r10_1.checked) && (r11.checked || r11_1.checked) && r4_1.checked){
+                    return true;
+                }
+                else {
+                    cancelFunc();
+                    if(!r10.checked && !r10_1.checked){
+                        window.document.getElementById("diabetesText").style.color="red";
+                        diabetesTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r9.checked && !r9_1.checked){
+                        window.document.getElementById("glandsText").style.color="red";
+                        glandsTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r8.checked && !r8_1.checked){
+                        window.document.getElementById("PathologyText").style.color="red";
+                        PathologyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r7.checked && !r7_1.checked){
+                        window.document.getElementById("AllergyText").style.color="red";
+                        AllergyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r6.checked && !r6_1.checked){
+                        window.document.getElementById("iodineText").style.color="red";
+                        iodineTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r5.checked && !r5_1.checked){
+                        window.document.getElementById("PregnancyText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r3.checked){
+                        window.document.getElementById("thirdText").style.backgroundColor="#ff0852";
+                        window.document.getElementById("thirdText2").style.backgroundColor="#ff0852";
+                        thirdTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+
+                    if(!r2.checked){
+                        window.document.getElementById("secondText").style.backgroundColor="#ff0852";
+                        window.document.getElementById("secondText2").style.backgroundColor="#ff0852";
+                        secondTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r1.checked){
+                        window.document.getElementById("firstText").style.backgroundColor="#ff0852";
+                        window.document.getElementById("firstText2").style.backgroundColor="#ff0852";
+                        firstTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r4.checked){
+                        window.document.getElementById("MRTtext").style.color="red";
+                    }
+                    if(!r4_1.checked){
+                        window.document.getElementById("MRTtextContrast").style.color="red";
+                    }
+                    return false;
+                }
+            }
+
+
+            function  cancelFunc(){
+                window.document.getElementById("final_text").textContent="Некоторые поля не заполнены";
+                window.document.getElementById("saveButton").style.display='none';
+                window.document.getElementById("cancelButton").style.display='block';
+                profile('block');
+            }
+            function exitInCancel(){
+                window.document.getElementById("saveButton").style.display='block';
+                window.document.getElementById("cancelButton").style.display='none';
+                window.document.getElementById("final_text").textContent="Данные успешно сохранены";
+                profile('none');
+            }
+
+        </script>
+
+    <script>
+        function cls(){
+            window.document.getElementById("canvasDiv").style.display='none';
+        }
+        function cls2(){
+            window.document.getElementById("canvasDiv").style.display='block';
+        }
+    </script>
+
+    <script>
+        function sendMail() {
+            var link = "mailto:anketa@healthcity.kz"
+                + "?cc=anketa@healthcity.kz"
+                + "&subject=" + escape("This is my subject")
+                + "&body=" + escape(document.getElementById('Body').value)
+            ;
+            window.location.href = link;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function loadAncet(){
+            window.document.getElementById("videoCheck").style.display = "none";
+            window.document.getElementById("container_content").style.display = "block";
+
+            window.document.getElementById("PregnancyNo").checked = true;
+            window.document.getElementById("iodineNo").checked = true;
+            window.document.getElementById("AllergyNo").checked = true;
+            window.document.getElementById("PathologyNo").checked = true;
+            window.document.getElementById("glandsNo").checked = true;
+            window.document.getElementById("diabetesNo").checked = true;
+            window.document.getElementById("contrastingNo").checked = true;
+        }
+    </script>
+
+<!--    Upload-->
+    <script type="text/javascript">
+        function profile(state){
+            document.getElementById('gray').style.display = state;
+            document.getElementById('window').style.display = state;
+        }
+    </script>
+    <script type="text/javascript">
+        function checkOpekOpen(){
+            document.getElementById('firstNameOpek').style.display='block';
+            document.getElementById('secondNameOpek').style.display='block';
+            document.getElementById('lastNameNameOpek').style.display='block';
+        }
+        function checkOpekClose(){
+            document.getElementById('firstNameOpek').style.display='none';
+            document.getElementById('secondNameOpek').style.display='none';
+            document.getElementById('lastNameNameOpek').style.display='none';
+        }
+    </script>
+</head>
+<body>
+
+<div class="text-center" style="padding:20px;">
+    <input type="button" id="rep" value="Kaz" class="btn btn-info ">
+    <input type="button" id="rep" value="Rus" class="btn btn-info ">
+    <input type="button" id="rep" value="Eng" class="btn btn-info ">
+</div>
+
+<div class="selected" id="selector">
+    <a href="#" class="button6" onclick="selectKT()">КТ</a>
+    <a href="MRT.html" class="button6" >МРТ</a>
+<!--    onclick="selectMRT()"-->
+</div>
+
+<div id="CameraOrHand">
+    <a href="#" class="button6" onclick="selectedAuto()">Регистрация с удостоверения</a>
+    <a href="#" class="button6" onclick="selectedHand()">Ручной ввод</a>
+</div>
+
+<div id="patientDataType">
+    <textarea id="firstName" placeholder="Фамилия пациента"></textarea>
+    <textarea id="secondName" placeholder="Имя пациента"  ></textarea>
+    <textarea id="lastnameName" placeholder="Отчество пациента" ></textarea>
+
+
+    <textarea id="BirthOfDateDay" placeholder="День" ></textarea>
+    <textarea id="lastnameNameMonth" placeholder="Месяц" ></textarea>
+    <textarea id="lastnameNameYear" placeholder="Год" ></textarea>
+    <!--    <input type="text" id="BirthOfDate" onfocus="(this.type='date')" placeholder="Дата рождения пациента"/>-->
+
+<!--    жалобы-->
+
+
+
+
+    <textarea id="IIN"  placeholder="ИИН пациента"></textarea>
+    <textarea id="PatWeight"  placeholder="Вес:"></textarea>
+    <h5 id="jhalobyText">Исследование </h5>
+    <select id="jhalobyValue">
+        <option>Головной мозг</option>
+        <option>Пазухи носа</option>
+        <option>Мягкие ткани, шеи</option>
+        <option>Грудная клетка</option>
+        <option>Органы брюшной полости</option>
+        <option>Органы малого таза</option>
+        <option>Позвоночник</option>
+        <option>Суставы</option>
+    </select>
+
+    <!--    жалобы-->
+
+    <h3 id="OpekunValue" align="center">Опекун <input class="option-input radio"  type="radio" id="OpekYES" name="Opekun" onclick="checkOpekOpen()">ДА <input class="option-input radio" type="radio" id="OpekNO" name="Opekun" onclick="checkOpekClose()">НЕТ</h3>
+    <textarea id="firstNameOpek" placeholder="Фамилия опекуна"></textarea>
+    <textarea id="secondNameOpek" placeholder="Имя опекуна"  ></textarea>
+    <textarea id="lastNameNameOpek" placeholder="Отчество опекуна" ></textarea>
+    <h3 id="contrastValue" align="center">С контрастным препаратом<input class="option-input radio"  type="radio" id="contrastCheckBoxYES" name="contrastP">ДА<input class="option-input radio" type="radio" id="contrastCheckBoxNO" name="contrastP">НЕТ</h3>
+    <button onclick="loadDataInHand()" id="savePatDataButton" class="btn btn-info ">Сохранить</button>
+</div>
+
+
+
+
+<!--<div class="VideoCheck" id="videoCheck">-->
+<!--    <div class="camera">-->
+<!--        <video id="video">Video stream not available.</video>-->
+<!--    </div>-->
+<!--    <button id="startbutton" onclick="loadAncet()">Take photo</button>-->
+
+<!--    <canvas id="canvas">-->
+<!--    </canvas>-->
+<!--    <div class="output">-->
+<!--        <img id="photo" alt="The screen capture will appear in this box.">-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div id="gray" onclick="profile('none')"></div>
+<div id="window">
+    <div class="form">
+        <form action="CalendarPage.html" name="f1">
+            <h3 id="final_text">Данные успешно сохранены</h3>
+            <input type="button" value="ОК" name="save" class="input" id="saveButton" onclick="location.reload(); return false;">
+            <input type="button" value="ОК" name="save" class="input" id="cancelButton" onclick="exitInCancel()">
+        </form>
+    </div>
+</div>
+
+<div class="container_content" id="container_content">
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0" >
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title" align="center">
+                                ИНФОРМИРОВАННОЕ ДОБРОВОЛЬНОЕ СОГЛАСИЕ<br/>НА ПРОВЕДЕНИЕ РЕНТГЕН И КОМПЬЮТЕРНОЙ ТОМОГРАФИИ
+                                <p>в диагностическом центре «Health city»<br/>(заполняется пациентом старше 15 лет или законным представителем пациента)</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr class="heading">
+                <td id="firstText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+
+                <td style="background:#fc6719;color: white" id="firstText2">№1</td>
+            </tr>
+
+            <tr class="details">
+                <td style="font-weight:bold;">Сообщите персоналу о наличии у вас беременности, аллергии на лекарственные препараты, аллергию на йод или йодсодержащие препараты, имплантатов.</td>
+
+                <td><input type="radio" class="option-input radio" id="firstCheck"></td>
+
+            </tr>
+
+            <tr class="heading">
+                <td  style="background:#fc6719;color: white">Информация о пациенте:</td>
+
+                <td style="background:#fc6719;color: white"></td>
+            </tr>
+
+            <tr class="item last">
+                <td style="font-weight:bold;">Ф.И.О. (пациента):</td>
+
+                <td id="EnteredName" style="font-weight:bold;">Другов Виктор Юрьевич</td>
+            </tr>
+
+            <tr class="item last">
+                <td style="font-weight:bold;" id="EnteredFamilyNameText">Ф.И.О. (родителя/опекуна):</td>
+
+                <td id="EnteredFamilyName" style="font-weight:bold;">Другов Виктор Юрьевич</td>
+            </tr>
+
+            <tr class="item last">
+
+                <td style="font-weight:bold;">Дата рождения(пациента):</td>
+
+                <td id="EnteredBirthOfDate" style="font-weight:bold;">05.12.1997</td>
+            </tr>
+
+
+            <tr class="item last">
+                <td style="font-weight:bold;">ИИН(пациента):</td>
+
+                <td id="EnteredIIN" style="font-weight:bold;">971205301036</td>
+            </tr>
+
+            <tr class="item last">
+                <td style="font-weight:bold;">Вес:</td>
+                <td id="EnteredWeight" style="font-weight:bold;">971205301036</td>
+            </tr>
+
+            <tr class="details" >
+                <td style="font-weight:bold;">Жалобы:</td>
+                <td id="selectedElement">
+                    <h5 id="selectedTextID" style="display: none"></h5>
+                    <!--ГОЛОВНОЙ МОЗГ-->
+                    <select class="select-css" id="selectedValueHead" style="display: none">
+                        <option id="opt1">Боль</option>
+                        <option id="opt1_1">Головокружение</option>
+                        <option id="opt1_2">Травма</option>
+                        <option id="opt1_3">Другое</option>
+                    </select>
+                    <!--Пазухи носа-->
+                    <select class="select-css" id="selectedValueNous" style="display: none">
+                        <option id="opt2">Боль</option>
+                        <option id="opt2_1">Выделения</option>
+                        <option id="opt2_2">Искривление носовой перегородки</option>
+                        <option id="opt2_3">Другое</option>
+                    </select>
+                    <!--Мягкие ткани шеи:-->
+                    <select class="select-css" id="selectedValueLight" style="display: none">
+                        <option id="opt3">Боль</option>
+                        <option id="opt3_1">Першение</option>
+                        <option id="opt3_2">«ком в горле»</option>
+                        <option id="opt3_3">Образование</option>
+                        <option id="opt3_4">Другое</option>
+                    </select>
+                    <!--Грудная клетка-->
+                    <select class="select-css" id="selectedValueBoobs" style="display: none">
+                        <option id="opt4">Боль</option>
+                        <option id="opt4_1">Кашель</option>
+                        <option id="opt4_2">Трудно дышать</option>
+                        <option id="opt4_3">Травма</option>
+                        <option id="opt4_4">Температура</option>
+                        <option id="opt4_5">Одышка</option>
+                        <option id="opt4_6">Образование</option>
+                        <option id="opt4_7">Другое</option>
+                    </select>
+                    <!--Органы брюшной полости-->
+                    <select class="select-css" id="selectedValueOBP" style="display: none">
+                        <option id="opt5">Боль</option>
+                        <option id="opt5_1">Травма</option>
+                        <option id="opt5_2">Образование</option>
+                        <option id="opt5_3">Камни в почках</option>
+                        <option id="opt5_4">Камни в желчном</option>
+                        <option id="opt5_5">Другое</option>
+                    </select>
+                    <!--Органы малого таза-->
+                    <select class="select-css" id="selectedValueOMT" style="display: none">
+                        <option id="opt6">Боль</option>
+                        <option id="opt6_1">Образование</option>
+                        <option id="opt6_2">Воспаление</option>
+                        <option id="opt6_3">Другое</option>
+                    </select>
+                    <!--Позвоночник-->
+                    <select class="select-css" id="selectedValueHrebet" style="display: none">
+                        <option id="opt7">Боль</option>
+                        <option id="opt7_1">Травма (локализовать)</option>
+                        <option id="opt7_2">Грыжа, протрузия</option>
+                        <option id="opt7_3">Другое</option>
+                    </select>
+                    <!--Суставы-->
+                    <select class="select-css" id="selectedValueSust" style="display: none">
+                        <option id="opt8">Боль</option>
+                        <option id="opt8_1">Травма локализовать</option>
+                        <option id="opt8_2">Другое</option>
+                    </select>
+                </td>
+            </tr>
+
+
+            <tr class="heading">
+                <td id="secondText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+
+                <td style="background:#fc6719;color: white" id="secondText2">№2</td>
+            </tr>
+            <tr class="details" id="bigText">
+                <td style="font-weight:bold;">Я, ознакомлен(а) с намеченным планом моего (или моего ребенка) обследования и лечения. Мне разъяснены цель и необходимость проведения
+                    рентгеновской компьютерной томографии, возможные последствия и осложнения в результате этого исследования. Я проинформирован(а) о принципах
+                    данного исследования и о том, что оно сопровождается определенным рентгеновским облучением. Я информирован(а) о наличии альтернативных
+                    нерадиационных методов диагностики, преимуществах и недостатках данного вида исследования. Я информирован(а) о возможной необходимости
+                    проведения дополнительного исследования с внутривенным введением йодсодержащего рентгенконтрастного вещества и даю свое согласие на
+                    его введение. Я проинформирован(а) о возможных осложнениях при введении контрастного вещества (инъекция любого препарата таит в себе
+                    определенный риск, связанный с повреждением нерва, артерии или вены, с возникновением инфекционных осложнений или побочной реакции
+                    на введение контрастного препарата, которые редки, чаще всего проявляются в виде тошноты, рвоты, высыпаний на коже, жара; крайне редко
+                    могут возникнуть более серьезные реакции на контрастный препарат, степень их выраженности различна, особенно опасен анафилактических
+                    шок и индивидуальная непереносимость конкретного рентгенконтрастного вещества, летальный исход на введение контрастного вещества по
+                    данным мировой практики составляет 1: 175000). Я осознаю наличие анестезиологического риска во время проведения компьютерной томографии,
+                    согласен(на) на то, что ход анестезиологического пособия может быть изменен врачами по их усмотрению. Я целиком и полностью доверяю
+                    врачам в тактике лечения возможных осложнений, связанных с проведением компьютерной томографии, введением контрастного препарата и
+                    оказанием анестезиологического пособия.</td>
+                <td><input type="radio" class="option-input radio" id="secondCheck"></td>
+
+            </tr>
+
+            <tr class="heading" >
+                <td style="background:#fc6719;color: white">Обязательное соглашение</td>
+
+                <td style="background:#fc6719;color: white">№3</td>
+            </tr>
+
+            <td align="center" style="font-weight:bold;">Перед началом исследования я сообщаю о себе (своем ребенке) следующую информацию:<br/>Наличие или отсутствие у Вас (вашего ребенка):</td>
+
+            <tr class="item last">
+
+                <td id="sdadsa"></td>
+
+                <td><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3></td>
+            </tr>
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="PregnancyText">Беременность</td>
+
+                <td><input type="radio" class="option-input radio" name="Pregnancy" id="PregnancyYes">ДА<input type="radio" class="option-input radio" name="Pregnancy" id="PregnancyNo">НЕТ</td>
+            </tr>
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="iodineText">Непереносимости препаратов йода</td>
+
+                <td><input type="radio" class="option-input radio" name="iodine" id="iodineYes">ДА<input type="radio" class="option-input radio" name="iodine" id="iodineNo">НЕТ</td>
+            </tr>
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="AllergyText">Аллергических реакций</td>
+
+                <td><input type="radio" class="option-input radio" name="Allergy" id="AllergyYes">ДА<input type="radio" class="option-input radio" name="Allergy" id="AllergyNo">НЕТ</td>
+            </tr>
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="PathologyText">Патологии почек</td>
+
+                <td><input type="radio" class="option-input radio" name="Pathology" id="PathologyYes">ДА<input type="radio" class="option-input radio" name="Pathology" id="PathologyNo">НЕТ</td>
+            </tr>
+
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="glandsText">Заболевания щитовидной железы</td>
+
+                <td><input type="radio" class="option-input radio" name="glands" id="glandsYes">ДА<input type="radio" class="option-input radio" name="glands" id="glandsNo">НЕТ</td>
+            </tr>
+
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="diabetesText">Сахарного диабета</td>
+
+                <td><input type="radio" class="option-input radio" name="diabetes" id="diabetesYes">ДА<input type="radio" class="option-input radio" name="diabetes" id="diabetesNo">НЕТ</td>
+            </tr>
+
+
+            <tr class="item last" style="font-weight:bold;">
+
+                <td id="contrastingText">Обследовались ли Вы ранее с использованием контрастных препаратов</td>
+
+                <td><input type="radio" class="option-input radio" name="contrasting" id="contrastingYes">ДА<input type="radio" class="option-input radio" name="contrasting" id="contrastingNo">НЕТ</td>
+            </tr>
+
+            <tr class="heading">
+                <td id="thirdText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td style="background:#fc6719;color: white" id="thirdText2" >№4</td>
+            </tr>
+
+            <tr class="details" style="font-weight:bold;">
+                <td>Я подтверждаю, что сообщил(а) достоверную информацию, связанную со здоровьем, физическим и психическим состоянием моего ребенка,
+                    а также перенесенными ранее заболеваниями и аллергическими реакциями. Я подтверждаю своей подписью, что прочитал(а) вышеизложенную
+                    информацию, информация и используемая медицинская терминология мне понятны, и я осознанно даю добровольное согласие на проведение рентгеновской компьютерной
+                    томографии и анестезиологическое пособие.</td>
+                <td><input type="radio" class="option-input radio" id="thirdCheck"></td>
+            </tr>
+
+            <tr class="heading" id="activeContrast">
+                <td id="contrastText" style="background:#fc6719;color: white">Ознакомление с конрастом</td>
+                <td style="background:#fc6719;color: white"></td>
+            </tr>
+
+            <tr class="details" id="activeContrast2" style="font-weight:bold;">
+                <td>Вам назначено исследование, которое требует внутривенного введения специального медицинского препарата,
+                    называемого контрастным веществом. Как Вы, наверное, знаете, лучевые методы исследования позволяют получить
+                    изображения Ваших внутренних органов и тканей. Контрастное вещество усиливает изображение и помогает врачам
+                    выявить различные заболевания. Отказ от применения контрастного вещества может привести к ошибкам в постановке
+                    диагноза. Контрастные вещества считаются достаточно безопасными. Однако, при инъекции может быть тошнота, рвота,
+                    чихание, сыпь на коже (достоверных методов выявления аллергических и аллергоподобных реакций на контрастирующие
+                    препараты МРТ и КТ на сегодняшний день не существует).<br/>
+                    У некоторых пациентов риск появления подобных осложнений значительно выше. К ним относятся:<br/>
+                    1.Люди, которые ранее имели подобные осложнения от введения контрастного вещества;<br/>
+                    2.Люди с аллергическими заболеваниями и, особенно, астмой; <br/>
+                    3.Пациенты с тяжелыми заболеваниями сердца; <br/>
+                    4.Пациенты с миеломной болезнью, заболеваниями крови, полицитемией и феохромоцитомой; <br/>
+                    5.Пациенты с заболеваниями почек.<br/>
+                    Если Вы считаете, что относитесь к вышеуказанной группе пациентов, обязательно дайте знать об этом врачу!<br/>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td id="fourthText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td style="background:#fc6719;color: white" id="fourthText2">№5</td>
+            </tr>
+
+            <tr class="details" >
+                <td id="MRTtext" style="font-weight:bold;">Прошу вас провести исследование КТ.</td>
+                <td><input type="radio" class="option-input radio" id="fourthCheck"></td>
+            </tr>
+
+            <tr class="details" id="activeContrast3" >
+                <td id="MRTtextContrast" style="font-weight:bold;">Я согласен (сна) на введение контрастного вещества</td>
+                <td><input type="radio" class="option-input radio" id="fourthCheckContrast"></td>
+            </tr>
+
+        </table>
+        <td>    <div id="canvasDiv"></div>
+            <script type="text/javascript">
+                drawingApp.init();
+            </script>
+        </td>
+        <input type="button" id="rep2" value="Очистить" class="btn btn-info" onclick="drawingApp.reload()">
+        <div class="text-center" style="padding:20px;">
+            <input type="button" id="rep1" value="Сохранить" class="btn btn-info btn_print">
+        </div>
+
+        <div id="mydiv"></div>
+    </div>
+</div>
+</body>
+</html>
