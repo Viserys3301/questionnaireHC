@@ -686,8 +686,9 @@
 
                             today = mm + '/' + dd + '/' + yyyy;
 
+                            var jaloba = window.document.getElementById("jhalobyValue").value;
 
-                            var fileName = "КТ_" + window.document.getElementById('firstName').value + "_" +
+                            var fileName = "КТ_" + jaloba + "_" + window.document.getElementById('firstName').value + "_" +
                                            window.document.getElementById('secondName').value + "_" +
                                            window.document.getElementById('lastnameName').value + "_" + today;
                             //more custom settings  + " " +  + " " + ;
@@ -834,7 +835,7 @@
             var contrastCheckBoxNO = window.document.getElementById("contrastCheckBoxNO");
 
 
-            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patIIN == "" ||
+            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patIIN == "" || patPatWeight=="" ||
                 (!OpekYES.checked && !OpekNO.checked) ||(!contrastCheckBoxYES.checked && !contrastCheckBoxNO.checked) ){
                 cancelFunc();
             }else {
