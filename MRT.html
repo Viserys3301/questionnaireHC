@@ -1252,6 +1252,24 @@
             document.getElementById('Sign').textContent="1";
         }
     </script>
+
+
+    <script type="text/javascript">
+        function checRadioWHoOpek(){
+            window.document.getElementById("OpekYES").checked = true;
+            checkOpekOpen();
+        }
+        function checRadioWHoMe(){
+            window.document.getElementById("OpekNO").checked = true;
+            checkOpekClose();
+        }
+        function checRadioContrastYes(){
+            window.document.getElementById("contrastCheckBoxYES").checked = true;
+        }
+        function checRadioContrastNo(){
+            window.document.getElementById("contrastCheckBoxNO").checked = true;
+        }
+    </script>
 </head>
 <body>
 
@@ -1305,11 +1323,11 @@
 
 
 
-    <h3 id="OpekunValue" align="center"><input class="option-input radio"  type="radio" id="OpekYES" name="Opekun" onclick="checkOpekOpen()">Опекун <input class="option-input radio" type="radio" id="OpekNO" name="Opekun" onclick="checkOpekClose()">Самостоятельно</h3>
+    <h3 id="OpekunValue" align="center"><input class="option-input radio"  type="radio" id="OpekYES" name="Opekun" onclick="checkOpekOpen()"><a onclick="checRadioWHoOpek()">Опекун</a><input class="option-input radio" type="radio" id="OpekNO" name="Opekun" onclick="checkOpekClose()"><a onclick="checRadioWHoMe()">Самостоятельно</a></h3>
     <textarea id="firstNameOpek" placeholder="Фамилия опекуна"></textarea>
     <textarea id="secondNameOpek" placeholder="Имя опекуна"  ></textarea>
     <textarea id="lastNameNameOpek" placeholder="Отчество опекуна" ></textarea>
-    <h3 id="contrastValue" align="center">С контрастным препаратом<input class="option-input radio"  type="radio" id="contrastCheckBoxYES" name="contrastP">ДА<input class="option-input radio" type="radio" id="contrastCheckBoxNO" name="contrastP">НЕТ</h3>
+    <h3 id="contrastValue" align="center">С контрастным препаратом<input class="option-input radio"  type="radio" id="contrastCheckBoxYES" name="contrastP"><a onclick="checRadioContrastYes()">ДА</a><input class="option-input radio" type="radio" id="contrastCheckBoxNO" name="contrastP"><a onclick="checRadioContrastNo()">НЕТ</a></h3>
     <button onclick="loadDataInHand()" id="savePatDataButton" class="btn btn-info ">Сохранить</button>
 </div>
 

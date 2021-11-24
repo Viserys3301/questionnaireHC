@@ -1208,14 +1208,32 @@
             document.getElementById('Sign').textContent="1";
         }
     </script>
+
+    <script type="text/javascript">
+        function checRadioWHoOpek(){
+            window.document.getElementById("OpekYES").checked = true;
+            checkOpekOpen();
+        }
+        function checRadioWHoMe(){
+            window.document.getElementById("OpekNO").checked = true;
+            checkOpekClose();
+        }
+        function checRadioContrastYes(){
+            window.document.getElementById("contrastCheckBoxYES").checked = true;
+        }
+        function checRadioContrastNo(){
+            window.document.getElementById("contrastCheckBoxNO").checked = true;
+        }
+    </script>
+
 </head>
 <body>
 
 <div class="text-center" style="padding:20px;">
 <!--    onclick="changeToKazLang()"-->
-    <input type="button" id="rep" value="Kaz" class="btn btn-info " >
+    <input type="button" id="rep" value="Kaz" class="btn btn-info " onclick="changeToKazLang()">
 <!--    onclick="changeToRusLang()"-->
-    <input type="button" id="rep" value="Rus" class="btn btn-info " >
+    <input type="button" id="rep" value="Rus" class="btn btn-info " onclick="changeToRusLang()">
 <!--    onclick="changeToEngLang()"-->
     <input type="button" id="rep" value="Eng" class="btn btn-info " >
 </div>
@@ -1262,23 +1280,23 @@
     <input type="tel" id="PatWeight"  placeholder="Вес:">
     <h5 id="jhalobyText">Исследование </h5>
     <select id="jhalobyValue">
-        <option>Головной мозг</option>
-        <option>Пазухи носа</option>
-        <option>Мягкие ткани, шеи</option>
-        <option>Грудная клетка</option>
-        <option>Органы брюшной полости</option>
-        <option>Органы малого таза</option>
-        <option>Позвоночник</option>
-        <option>Суставы</option>
+        <option id="OptionHead">Головной мозг</option>
+        <option id="OptionNous">Пазухи носа</option>
+        <option id="OptionTkan">Мягкие ткани, шеи</option>
+        <option id="OptionBoobs">Грудная клетка</option>
+        <option id="OptionOBP">Органы брюшной полости</option>
+        <option id="OptionOMT">Органы малого таза</option>
+        <option id="OptionHrebet">Позвоночник</option>
+        <option id="OptionSustav">Суставы</option>
     </select>
 
     <!--    жалобы-->
 
-    <h3 id="OpekunValue" align="center"><input class="option-input radio"  type="radio" id="OpekYES" name="Opekun" onclick="checkOpekOpen()">Опекун <input class="option-input radio" type="radio" id="OpekNO" name="Opekun" onclick="checkOpekClose()">Самостоятельно</h3>
+    <h3 id="OpekunValue" align="center"><input class="option-input radio"  type="radio" id="OpekYES" name="Opekun" onclick="checkOpekOpen()"><a onclick="checRadioWHoOpek()" id="OpekunText">Опекун</a><input class="option-input radio" type="radio" id="OpekNO" name="Opekun" onclick="checkOpekClose()"><a onclick="checRadioWHoMe()" id="SomeText">Самостоятельно</a></h3>
     <textarea id="firstNameOpek" placeholder="Фамилия опекуна"></textarea>
     <textarea id="secondNameOpek" placeholder="Имя опекуна"  ></textarea>
     <textarea id="lastNameNameOpek" placeholder="Отчество опекуна" ></textarea>
-    <h3 id="contrastValue" align="center">С контрастным препаратом<input class="option-input radio"  type="radio" id="contrastCheckBoxYES" name="contrastP">ДА<input class="option-input radio" type="radio" id="contrastCheckBoxNO" name="contrastP">НЕТ</h3>
+    <h3 id="contrastValue" align="center"><a id="ContastTextR">С контрастным препаратом</a><input class="option-input radio"  type="radio" id="contrastCheckBoxYES" name="contrastP"><a onclick="checRadioContrastYes()" id="ContrastTextYes">ДА</a><input class="option-input radio" type="radio" id="contrastCheckBoxNO" name="contrastP"><a onclick="checRadioContrastNo()" id="ContrastTextNo">НЕТ</a></h3>
     <button onclick="loadDataInHand()" id="savePatDataButton" class="btn btn-info ">Сохранить</button>
 </div>
 
@@ -1318,8 +1336,8 @@
                     <table>
                         <tr>
                             <td class="title" align="center">
-                                ИНФОРМИРОВАННОЕ ДОБРОВОЛЬНОЕ СОГЛАСИЕ<br/>НА ПРОВЕДЕНИЕ РЕНТГЕН И КОМПЬЮТЕРНОЙ ТОМОГРАФИИ
-                                <p>в диагностическом центре «Health city»<br/>(заполняется пациентом старше 15 лет или законным представителем пациента)</p>
+                                <a id="headerText1">ИНФОРМИРОВАННОЕ ДОБРОВОЛЬНОЕ СОГЛАСИЕ</a><br/><a id="headerText2">НА ПРОВЕДЕНИЕ РЕНТГЕН И КОМПЬЮТЕРНОЙ ТОМОГРАФИИ</a>
+                                <p><a id="headerText3">в диагностическом центре «Health city»</a><br/><a id="headerText4">(заполняется пациентом старше 15 лет или законным представителем пациента)</a></p>
                             </td>
                         </tr>
                     </table>
