@@ -46,7 +46,7 @@ var drawingApp = (function () {
 		clickDrag = [],
 		paint = false,
 		curColor = colorPurple,
-		curTool = "crayon",
+		curTool = "marker",
 		curSize = "normal",
 		mediumStartX = 0,
 		mediumStartY = 0,
@@ -170,7 +170,7 @@ var drawingApp = (function () {
 				selected = (curColor === colorPurple);
 				locX = selected ? 18 : 52;
 				locY = 19;
-				drawMarker(locX, locY, colorPurple, selected);
+				drawMarker(locX, locY, colorGreen, selected);
 
 				// Draw green marker
 				selected = (curColor === colorGreen);

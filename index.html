@@ -1025,6 +1025,7 @@
                 window.document.getElementById("firstText2").style.backgroundColor="#fc6719";
                 window.document.getElementById("MRTtext").style.color="black";
                 window.document.getElementById("MRTtextContrast").style.color="black";
+                window.document.getElementById("SignText").style.color="black";
 
                 var r1 = window.document.getElementById("firstCheck");
                 var r2 = window.document.getElementById("secondCheck");
@@ -1050,7 +1051,7 @@
                 var r11_1 = window.document.getElementById("contrastingNo");
 
                 var checkSign = window.document.getElementById("Sign").textContent
-
+                var SignText = window.document.getElementById("SignText");
 
                 const firstTextEl = document.getElementById('firstText');
                 const secondTextEl = document.getElementById('secondText');
@@ -1127,6 +1128,9 @@
                     }
                     if(!r4_1.checked){
                         window.document.getElementById("MRTtextContrast").style.color="red";
+                    }
+                    if ( checkSign!="1"){
+                        SignText.style.color="red";
                     }
                     return false;
                 }
@@ -1608,6 +1612,7 @@
             </tr>
 
         </table>
+        <h5 id="SignText">Подпись:</h5>
         <td>    <div id="canvasDiv" onclick="checkSign()"></div>
             <script type="text/javascript">
                 drawingApp.init();

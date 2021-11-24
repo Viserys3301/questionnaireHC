@@ -1073,14 +1073,16 @@
                 window.document.getElementById("thirdText2").style.backgroundColor="#fc6719";
                 // window.document.getElementById("firstText").style.backgroundColor="#fc6719";
                 // window.document.getElementById("firstText2").style.backgroundColor="#fc6719";
-                // window.document.getElementById("MRTtext").style.color="black";
-                // window.document.getElementById("MRTtextContrast").style.color="black";
+                 window.document.getElementById("MRTtext").style.color="black";
+                 window.document.getElementById("MRTtextContrast").style.color="black";
+                 window.document.getElementById("SignText").style.color="black";
 
 
                 var r3 = window.document.getElementById("thirdCheck");
                 var r4 = window.document.getElementById("fourthCheck");
                 var r4_1 = window.document.getElementById("fourthCheckContrast");
                 var r12 = window.document.getElementById("MRTtext");
+                var r13 = window.document.getElementById("MRTtextContrast");
 
                 var r5 = window.document.getElementById("PregnancyYes");
                 var r5_1 = window.document.getElementById("PregnancyNo");
@@ -1104,8 +1106,8 @@
                 var r17 = window.document.getElementById("DvePoloskiYes");
                 var r17_1 = window.document.getElementById("DvePoloskiNo");
 
-
-                var checkSign = window.document.getElementById("Sign").textContent
+                var checkSign = window.document.getElementById("Sign").textContent;
+                var SignText = window.document.getElementById("SignText");
 
                 const thirdTextEl = document.getElementById('thirdText');
                 const MRTtextEl = document.getElementById('MRTtext');
@@ -1168,18 +1170,14 @@
                         thirdTextEl.scrollIntoView({block: "center", inline: "center"});
                     }
 
-                    if(!r2.checked){
-                        window.document.getElementById("secondText2").style.backgroundColor="#ff0852";
-                    }
-                    if(!r1.checked){
-                        window.document.getElementById("firstText").style.backgroundColor="#ff0852";
-                        window.document.getElementById("firstText2").style.backgroundColor="#ff0852";
-                    }
                     if(!r4.checked){
                         window.document.getElementById("MRTtext").style.color="red";
                     }
                     if(!r4_1.checked){
                         window.document.getElementById("MRTtextContrast").style.color="red";
+                    }
+                    if ( checkSign!="1"){
+                        SignText.style.color="red";
                     }
                     return false;
                 }
@@ -1640,6 +1638,7 @@
             </tr>
 
         </table>
+        <h5 id="SignText">Подпись:</h5>
         <td>    <div id="canvasDiv" onclick="checkSign()"></div>
             <script type="text/javascript" src="html5-canvas-drawing-app.js"></script>
             <script type="text/javascript">
