@@ -708,7 +708,6 @@
                             // New Promise-based usage:
                             html2pdf().set(opt).from(element).save();
                             profile('block');
-                            window.document.getElementById("loadGif").style.display='none';
                         }
                     });
                 });
@@ -935,7 +934,6 @@
                 text.style.display='block';
             }
             window.document.getElementById("selectedTextID").style.display='block';
-            window.document.getElementById("loadGif").style.display='block';
 
         }
     </script>
@@ -1327,7 +1325,6 @@
             <h3 id="final_text">Данные успешно сохранены</h3>
             <input type="button" value="ОК" name="save" class="input" id="saveButton" onclick="location.reload(); return false;">
             <input type="button" value="ОК" name="save" class="input" id="cancelButton" onclick="exitInCancel()">
-            <img src="images/load.gif" alt="я джифка" id="loadGif" style="display: none">
         </form>
     </div>
 </div>
@@ -1340,7 +1337,7 @@
                     <table>
                         <tr>
                             <td class="title" align="center">
-                                <a id="headerText1">ИНФОРМИРОВАННОЕ ДОБРОВОЛЬНОЕ СОГЛАСИЕ</a><br/><a id="headerText2">НА ПРОВЕДЕНИЕ РЕНТГЕН И КОМПЬЮТЕРНОЙ ТОМОГРАФИИ</a>
+                                <a id="headerText1" style="color: #8A2BE2">ИНФОРМИРОВАННОЕ ДОБРОВОЛЬНОЕ СОГЛАСИЕ</a><br/><a id="headerText2" style="color: #8A2BE2">НА ПРОВЕДЕНИЕ РЕНТГЕН И КОМПЬЮТЕРНОЙ ТОМОГРАФИИ</a>
                                 <p><a id="headerText3">в диагностическом центре «Health city»</a><br/><a id="headerText4">(заполняется пациентом старше 15 лет или законным представителем пациента)</a></p>
                             </td>
                         </tr>
