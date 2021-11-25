@@ -708,6 +708,7 @@
                             // New Promise-based usage:
                             html2pdf().set(opt).from(element).save();
                             profile('block');
+                            window.document.getElementById("loadGif").style.display='none';
                         }
                     });
                 });
@@ -933,10 +934,8 @@
                 Sust.style.display='none';
                 text.style.display='block';
             }
-
-
-
             window.document.getElementById("selectedTextID").style.display='block';
+            window.document.getElementById("loadGif").style.display='block';
 
         }
     </script>
@@ -1328,6 +1327,7 @@
             <h3 id="final_text">Данные успешно сохранены</h3>
             <input type="button" value="ОК" name="save" class="input" id="saveButton" onclick="location.reload(); return false;">
             <input type="button" value="ОК" name="save" class="input" id="cancelButton" onclick="exitInCancel()">
+            <img src="images/load.gif" alt="я джифка" id="loadGif" style="display: none">
         </form>
     </div>
 </div>
@@ -1356,20 +1356,20 @@
             </tr>
 
             <tr class="details">
-                <td style="font-weight:bold;">Сообщите персоналу о наличии у вас беременности, аллергии на лекарственные препараты, аллергию на йод или йодсодержащие препараты, имплантатов.</td>
+                <td style="font-weight:bold;"><a id="Text1">Сообщите персоналу о наличии у вас беременности, аллергии на лекарственные препараты, аллергию на йод или йодсодержащие препараты, имплантатов.</a></td>
 
                 <td><input type="radio" class="option-input radio" id="firstCheck"></td>
 
             </tr>
 
             <tr class="heading">
-                <td  style="background:#fc6719;color: white">Информация о пациенте:</td>
+                <td  style="background:#fc6719;color: white"><a id="PatInfo">Информация о пациенте:</a></td>
 
                 <td style="background:#fc6719;color: white"></td>
             </tr>
 
             <tr class="item last">
-                <td style="font-weight:bold;">Ф.И.О. (пациента):</td>
+                <td style="font-weight:bold;"><a id="FIO">Ф.И.О. (пациента):</a></td>
 
                 <td id="EnteredName" style="font-weight:bold;">Другов Виктор Юрьевич</td>
             </tr>
@@ -1382,14 +1382,14 @@
 
             <tr class="item last">
 
-                <td style="font-weight:bold;">Дата рождения(пациента):</td>
+                <td style="font-weight:bold;"><a id="BirthOfDatePat">Дата рождения(пациента):</a></td>
 
                 <td id="EnteredBirthOfDate" style="font-weight:bold;">05.12.1997</td>
             </tr>
 
 
             <tr class="item last">
-                <td style="font-weight:bold;">ИИН(пациента):</td>
+                <td style="font-weight:bold;"><a id="PatIIN">ИИН(пациента):</a></td>
 
                 <td id="EnteredIIN" style="font-weight:bold;">971205301036</td>
             </tr>
@@ -1400,7 +1400,7 @@
             </tr>
 
             <tr class="details" >
-                <td style="font-weight:bold;">Жалобы:</td>
+                <td style="font-weight:bold;"><a id="jalText">Жалобы:</a></td>
                 <td id="selectedElement">
                     <h5 id="selectedTextID" style="display: none"></h5>
                     <!--ГОЛОВНОЙ МОЗГ-->
@@ -1470,12 +1470,12 @@
 
 
             <tr class="heading">
-                <td id="secondText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td id="secondText" style="background:#fc6719;color: white"><a id="AcceptText2">Обязательное соглашение</a></td>
 
                 <td style="background:#fc6719;color: white" id="secondText2">№2</td>
             </tr>
             <tr class="details" id="bigText">
-                <td style="font-weight:bold;">Я, ознакомлен(а) с намеченным планом моего (или моего ребенка) обследования и лечения. Мне разъяснены цель и необходимость проведения
+                <td style="font-weight:bold;"><a id="OznakText1">Я, ознакомлен(а) с намеченным планом моего (или моего ребенка) обследования и лечения. Мне разъяснены цель и необходимость проведения
                     рентгеновской компьютерной томографии, возможные последствия и осложнения в результате этого исследования. Я проинформирован(а) о принципах
                     данного исследования и о том, что оно сопровождается определенным рентгеновским облучением. Я информирован(а) о наличии альтернативных
                     нерадиационных методов диагностики, преимуществах и недостатках данного вида исследования. Я информирован(а) о возможной необходимости
@@ -1488,18 +1488,18 @@
                     данным мировой практики составляет 1: 175000). Я осознаю наличие анестезиологического риска во время проведения компьютерной томографии,
                     согласен(на) на то, что ход анестезиологического пособия может быть изменен врачами по их усмотрению. Я целиком и полностью доверяю
                     врачам в тактике лечения возможных осложнений, связанных с проведением компьютерной томографии, введением контрастного препарата и
-                    оказанием анестезиологического пособия.</td>
+                    оказанием анестезиологического пособия.</a></td>
                 <td><input type="radio" class="option-input radio" id="secondCheck"></td>
 
             </tr>
 
             <tr class="heading" >
-                <td style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td style="background:#fc6719;color: white"><a id="AcceptText3">Обязательное соглашение</a></td>
 
                 <td style="background:#fc6719;color: white">№3</td>
             </tr>
 
-            <td align="center" style="font-weight:bold;">Перед началом исследования я сообщаю о себе (своем ребенке) следующую информацию:<br/>Наличие или отсутствие у Вас (вашего ребенка):</td>
+            <td align="center" style="font-weight:bold;"><a id="warning1">Перед началом исследования я сообщаю о себе (своем ребенке) следующую информацию:<br/>Наличие или отсутствие у Вас (вашего ребенка):</a></td>
 
             <tr class="item last">
 
@@ -1510,28 +1510,28 @@
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="PregnancyText">Беременность</td>
+                <td id="PregnancyText"><a id="PregnancyTextLn">Беременность</a></td>
 
                 <td><input type="radio" class="option-input radio" name="Pregnancy" id="PregnancyYes">ДА<input type="radio" class="option-input radio" name="Pregnancy" id="PregnancyNo">НЕТ</td>
             </tr>
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="iodineText">Непереносимости препаратов йода</td>
+                <td id="iodineText"><a id="iodineTextLn">Непереносимости препаратов йода</a></td>
 
                 <td><input type="radio" class="option-input radio" name="iodine" id="iodineYes">ДА<input type="radio" class="option-input radio" name="iodine" id="iodineNo">НЕТ</td>
             </tr>
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="AllergyText">Аллергических реакций</td>
+                <td id="AllergyText"><a id="AllergyTextLn">Аллергических реакций</a></td>
 
                 <td><input type="radio" class="option-input radio" name="Allergy" id="AllergyYes">ДА<input type="radio" class="option-input radio" name="Allergy" id="AllergyNo">НЕТ</td>
             </tr>
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="PathologyText">Патологии почек</td>
+                <td id="PathologyText"><a id="PathologyTextLn">Патологии почек</a></td>
 
                 <td><input type="radio" class="option-input radio" name="Pathology" id="PathologyYes">ДА<input type="radio" class="option-input radio" name="Pathology" id="PathologyNo">НЕТ</td>
             </tr>
@@ -1539,7 +1539,7 @@
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="glandsText">Заболевания щитовидной железы</td>
+                <td id="glandsText"><a id="glandsTextLn">Заболевания щитовидной железы</a></td>
 
                 <td><input type="radio" class="option-input radio" name="glands" id="glandsYes">ДА<input type="radio" class="option-input radio" name="glands" id="glandsNo">НЕТ</td>
             </tr>
@@ -1547,7 +1547,7 @@
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="diabetesText">Сахарного диабета</td>
+                <td id="diabetesText"><a id="diabetesTextLn">Сахарного диабета</a></td>
 
                 <td><input type="radio" class="option-input radio" name="diabetes" id="diabetesYes">ДА<input type="radio" class="option-input radio" name="diabetes" id="diabetesNo">НЕТ</td>
             </tr>
@@ -1555,31 +1555,31 @@
 
             <tr class="item last" style="font-weight:bold;">
 
-                <td id="contrastingText">Обследовались ли Вы ранее с использованием контрастных препаратов</td>
+                <td id="contrastingText"><a id="contrastingTextLn">Обследовались ли Вы ранее с использованием контрастных препаратов</a></td>
 
                 <td><input type="radio" class="option-input radio" name="contrasting" id="contrastingYes">ДА<input type="radio" class="option-input radio" name="contrasting" id="contrastingNo">НЕТ</td>
             </tr>
 
             <tr class="heading">
-                <td id="thirdText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td id="thirdText" style="background:#fc6719;color: white"><a id="AcceptText4">Обязательное соглашение</a></td>
                 <td style="background:#fc6719;color: white" id="thirdText2" >№4</td>
             </tr>
 
             <tr class="details" style="font-weight:bold;">
-                <td>Я подтверждаю, что сообщил(а) достоверную информацию, связанную со здоровьем, физическим и психическим состоянием моего ребенка,
+                <td><a id="Text4">Я подтверждаю, что сообщил(а) достоверную информацию, связанную со здоровьем, физическим и психическим состоянием моего ребенка,
                     а также перенесенными ранее заболеваниями и аллергическими реакциями. Я подтверждаю своей подписью, что прочитал(а) вышеизложенную
                     информацию, информация и используемая медицинская терминология мне понятны, и я осознанно даю добровольное согласие на проведение рентгеновской компьютерной
-                    томографии и анестезиологическое пособие.</td>
+                    томографии и анестезиологическое пособие.</a></td>
                 <td><input type="radio" class="option-input radio" id="thirdCheck"></td>
             </tr>
 
             <tr class="heading" id="activeContrast">
-                <td id="contrastText" style="background:#fc6719;color: white">Ознакомление с конрастом</td>
+                <td id="contrastText" style="background:#fc6719;color: white"><a id="AcceptText5">Ознакомление с конрастом</a></td>
                 <td style="background:#fc6719;color: white"></td>
             </tr>
 
             <tr class="details" id="activeContrast2" style="font-weight:bold;">
-                <td>Вам назначено исследование, которое требует внутривенного введения специального медицинского препарата,
+                <td><a id="Text5">Вам назначено исследование, которое требует внутривенного введения специального медицинского препарата,
                     называемого контрастным веществом. Как Вы, наверное, знаете, лучевые методы исследования позволяют получить
                     изображения Ваших внутренних органов и тканей. Контрастное вещество усиливает изображение и помогает врачам
                     выявить различные заболевания. Отказ от применения контрастного вещества может привести к ошибкам в постановке
@@ -1592,22 +1592,22 @@
                     3.Пациенты с тяжелыми заболеваниями сердца; <br/>
                     4.Пациенты с миеломной болезнью, заболеваниями крови, полицитемией и феохромоцитомой; <br/>
                     5.Пациенты с заболеваниями почек.<br/>
-                    Если Вы считаете, что относитесь к вышеуказанной группе пациентов, обязательно дайте знать об этом врачу!<br/>
+                    Если Вы считаете, что относитесь к вышеуказанной группе пациентов, обязательно дайте знать об этом врачу!<br/></a>
                 </td>
             </tr>
 
             <tr class="heading">
-                <td id="fourthText" style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td id="fourthText" style="background:#fc6719;color: white"><a id="AcceptText6">Обязательное соглашение</a></td>
                 <td style="background:#fc6719;color: white" id="fourthText2">№5</td>
             </tr>
 
             <tr class="details" >
-                <td id="MRTtext" style="font-weight:bold;">Прошу вас провести исследование КТ.</td>
+                <td id="MRTtext" style="font-weight:bold;"><a id="AcceptCT">Прошу вас провести исследование КТ.</a></td>
                 <td><input type="radio" class="option-input radio" id="fourthCheck"></td>
             </tr>
 
             <tr class="details" id="activeContrast3" >
-                <td id="MRTtextContrast" style="font-weight:bold;">Я согласен (сна) на введение контрастного вещества</td>
+                <td id="MRTtextContrast" style="font-weight:bold;"><a id="AcceptContestText">Я согласен (сна) на введение контрастного вещества</a></td>
                 <td><input type="radio" class="option-input radio" id="fourthCheckContrast"></td>
             </tr>
 
