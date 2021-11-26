@@ -865,8 +865,8 @@
             var contrastCheckBoxYES = window.document.getElementById("contrastCheckBoxYES");
             var contrastCheckBoxNO = window.document.getElementById("contrastCheckBoxNO");
 
-
-            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patIIN == "" || patPatWeight=="" ||
+        // || patIIN == ""
+            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == ""  || patPatWeight=="" ||
                 (!OpekYES.checked && !OpekNO.checked) ||(!contrastCheckBoxYES.checked && !contrastCheckBoxNO.checked) ){
                 cancelFunc();
             }else {

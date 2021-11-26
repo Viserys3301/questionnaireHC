@@ -908,8 +908,8 @@
             var contrastCheckBoxYES = window.document.getElementById("contrastCheckBoxYES");
             var contrastCheckBoxNO = window.document.getElementById("contrastCheckBoxNO");
 
-
-            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patIIN == "" || patPhone == "" || patPatWeight=="" ||
+        // || patIIN == ""
+            if(patFirstName=="" ||  patSecondName=="" || patLastName== "" || patBirthOfDate == "" || patPhone == "" || patPatWeight=="" ||
                 (!OpekYES.checked && !OpekNO.checked) ||(!contrastCheckBoxYES.checked && !contrastCheckBoxNO.checked) ){
                 cancelFunc();
             }else {
@@ -973,38 +973,44 @@
                 text.textContent = nous.value;
                 nous.style.display='none';
                 text.style.display='block';
-
             }
+
             if (Light.style.display!='none'){
                 text.textContent = Light.value;
                 Light.style.display='none';
                 text.style.display='block';
             }
+
             if (Boobs.style.display!='none'){
                 text.textContent = Boobs.value;
                 Boobs.style.display='none';
                 text.style.display='block';
             }
+
             if (OBP.style.display!='none'){
                 text.textContent = OBP.value;
                 OBP.style.display='none';
                 text.style.display='block';
             }
+
             if (OMT.style.display!='none'){
                 text.textContent = OMT.value;
                 OMT.style.display='none';
                 text.style.display='block';
             }
+
             if (Hrebet.style.display!='none'){
                 text.textContent = Hrebet.value;
                 Hrebet.style.display='none';
                 text.style.display='block';
             }
+
             if (Sust.style.display!='none'){
                 text.textContent = Sust.value;
                 Sust.style.display='none';
                 text.style.display='block';
             }
+
             window.document.getElementById("selectedTextID").style.display='block';
         }
     </script>
