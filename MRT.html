@@ -690,7 +690,7 @@
                 {
                     if (checkRadio()==true){
                         RadioToImage();
-                         hideElements();
+                        hideElements();
                         event.preventDefault();
 
                         //credit : https://ekoopmans.github.io/html2pdf.js
@@ -952,6 +952,7 @@
             window.document.getElementById("rep1").style.visibility='hidden';
             window.document.getElementById("rep2").style.visibility='hidden';
 
+            var head = window.document.getElementById('selectedValueHead');
             var nous = window.document.getElementById('selectedValueNous');
             var Light = window.document.getElementById('selectedValueLight');
             var Boobs = window.document.getElementById('selectedValueBoobs');
@@ -961,6 +962,12 @@
             var Sust = window.document.getElementById('selectedValueSust');
 
             var text = window.document.getElementById('selectedTextID');
+
+            if (head.style.display!='none'){
+                text.textContent = head.value;
+                head.style.display='none';
+                text.style.display='block';
+            }
 
 
             if (nous.style.display!='none'){
