@@ -697,6 +697,7 @@
                     {
 
                         if (checkRadio()==true){
+                            RadioToImage();
                             hideElements();
                             event.preventDefault();
 
@@ -1252,6 +1253,24 @@
         }
     </script>
 
+    <script>
+        function RadioToImage(){
+            document.getElementById('firstCheck').style.display='none';
+            document.getElementById('secondCheck').style.display='none';
+            document.getElementById('thirdCheck').style.display='none';
+            document.getElementById('fourthCheck').style.display='none';
+            document.getElementById('fourthCheckContrast').style.display='none';
+
+            document.getElementById('img1').style.display='block';
+            document.getElementById('img2').style.display='block';
+            document.getElementById('img3').style.display='block';
+            document.getElementById('img4').style.display='block';
+            document.getElementById('img5').style.display='block';
+            // img1(firstCheck) img2(secondCheck) img3(thirdCheck) img4(fourthCheck) img5(fourthCheckContrast)
+
+        }
+    </script>
+
 </head>
 <body>
 
@@ -1381,8 +1400,10 @@
 
             <tr class="details">
                 <td style="font-weight:bold;"><a id="Text1">Сообщите персоналу о наличии у вас беременности, аллергии на лекарственные препараты, аллергию на йод или йодсодержащие препараты, имплантатов.</a></td>
-
-                <td><input type="radio" class="option-input radio" id="firstCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="firstCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img1">
+                </td>
 
             </tr>
 
@@ -1513,7 +1534,10 @@
                     согласен(на) на то, что ход анестезиологического пособия может быть изменен врачами по их усмотрению. Я целиком и полностью доверяю
                     врачам в тактике лечения возможных осложнений, связанных с проведением компьютерной томографии, введением контрастного препарата и
                     оказанием анестезиологического пособия.</a></td>
-                <td><input type="radio" class="option-input radio" id="secondCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="secondCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img2">
+                </td>
 
             </tr>
 
@@ -1594,7 +1618,10 @@
                     а также перенесенными ранее заболеваниями и аллергическими реакциями. Я подтверждаю своей подписью, что прочитал(а) вышеизложенную
                     информацию, информация и используемая медицинская терминология мне понятны, и я осознанно даю добровольное согласие на проведение рентгеновской компьютерной
                     томографии и анестезиологическое пособие.</a></td>
-                <td><input type="radio" class="option-input radio" id="thirdCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="thirdCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img3">
+                </td>
             </tr>
 
             <tr class="heading" id="activeContrast">
@@ -1627,12 +1654,18 @@
 
             <tr class="details" >
                 <td id="MRTtext" style="font-weight:bold;"><a id="AcceptCT">Прошу вас провести исследование КТ.</a></td>
-                <td><input type="radio" class="option-input radio" id="fourthCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="fourthCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img4">
+                </td>
             </tr>
 
             <tr class="details" id="activeContrast3" >
                 <td id="MRTtextContrast" style="font-weight:bold;"><a id="AcceptContestText">Я согласен (сна) на введение контрастного вещества</a></td>
-                <td><input type="radio" class="option-input radio" id="fourthCheckContrast"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="fourthCheckContrast">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img5">
+                </td>
             </tr>
 
         </table>
