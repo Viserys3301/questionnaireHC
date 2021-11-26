@@ -689,6 +689,7 @@
                 $(document).on('click', '.btn_print', function(event)
                 {
                     if (checkRadio()==true){
+                        RadioToImage();
                          hideElements();
                         event.preventDefault();
 
@@ -1281,6 +1282,29 @@
             window.document.getElementById("contrastCheckBoxNO").checked = true;
         }
     </script>
+
+
+    <script>
+        function RadioToImage(){
+
+
+
+            document.getElementById('thirdCheck').style.display='none';
+            document.getElementById('fourthCheck').style.display='none';
+            document.getElementById('fourthCheckContrast').style.display='none';
+
+
+            document.getElementById('img1').style.display='block';
+            document.getElementById('img1').style.marginLeft="120px";
+            document.getElementById('img2').style.display='block';
+            document.getElementById('img2').style.marginLeft="120px";
+            document.getElementById('img3').style.display='block';
+            document.getElementById('img3').style.marginLeft="120px";
+            // img1(firstCheck) img2(secondCheck) img3(thirdCheck) img4(fourthCheck) img5(fourthCheckContrast)
+
+        }
+    </script>
+
 </head>
 <body>
 
@@ -1608,7 +1632,10 @@
                     а также перенесенными ранее заболеваниями и аллергическими реакциями. Я подтверждаю своей подписью, что прочитал(а) вышеизложенную
                     информацию, информация и используемая медицинская терминология мне понятны, и я осознанно даю добровольное согласие на проведение рентгеновской компьютерной
                     томографии и анестезиологическое пособие.</td>
-                <td><input type="radio" class="option-input radio" id="thirdCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="thirdCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img1">
+                </td>
             </tr>
 
             <tr class="heading" id="activeContrast">
@@ -1643,12 +1670,18 @@
 
             <tr class="details">
                 <td id="MRTtext" style="font-weight:bold;">Прошу вас провести исследование МРТ.</td>
-                <td><input type="radio" class="option-input radio" id="fourthCheck"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="fourthCheck">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img2">
+                </td>
             </tr>
 
             <tr class="details" id="activeContrast3">
                 <td id="MRTtextContrast" style="font-weight:bold;">Я согласен (сна) на введение контрастного вещества</td>
-                <td><input type="radio" class="option-input radio" id="fourthCheckContrast"></td>
+                <td>
+                    <input type="radio" class="option-input radio" id="fourthCheckContrast">
+                    <img src="images/2.jpg" width="40" height="40" style="display: none" id="img3">
+                </td>
             </tr>
 
         </table>
