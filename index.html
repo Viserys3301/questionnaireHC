@@ -834,13 +834,7 @@
             // window.document.getElementById("videoCheck").style.display = "block";
         }
         function loadDataInHand(){
-            window.document.getElementById("PregnancyNo").checked = true;
-            window.document.getElementById("iodineNo").checked = true;
-            window.document.getElementById("AllergyNo").checked = true;
-            window.document.getElementById("PathologyNo").checked = true;
-            window.document.getElementById("glandsNo").checked = true;
-            window.document.getElementById("diabetesNo").checked = true;
-            window.document.getElementById("contrastingNo").checked = true;
+
 
             checkJalobu();
 
@@ -1049,6 +1043,13 @@
                 window.document.getElementById("MRTtext").style.color="black";
                 window.document.getElementById("MRTtextContrast").style.color="black";
                 window.document.getElementById("SignText").style.color="black";
+                window.document.getElementById("contrastingTextLn").style.color="black";
+                window.document.getElementById("PregnancyText").style.color="black";
+                window.document.getElementById("iodineText").style.color="black";
+                window.document.getElementById("AllergyText").style.color="black";
+                window.document.getElementById("glandsText").style.color="black";
+                window.document.getElementById("PathologyText").style.color="black";
+                window.document.getElementById("diabetesText").style.color="black";
 
                 var r1 = window.document.getElementById("firstCheck");
                 var r2 = window.document.getElementById("secondCheck");
@@ -1056,7 +1057,6 @@
                 var r4 = window.document.getElementById("fourthCheck");
                 var r4_1 = window.document.getElementById("fourthCheckContrast");
                 var r12 = window.document.getElementById("MRTtext");
-
 
                 var r5 = window.document.getElementById("PregnancyYes");
                 var r5_1 = window.document.getElementById("PregnancyNo");
@@ -1106,6 +1106,12 @@
                 }
                 else {
                     cancelFunc();
+                    if(!r11.checked && !r11_1.checked){
+                        window.document.getElementById("contrastingTextLn").style.color="red";
+                        contrastingTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+
+
                     if(!r10.checked && !r10_1.checked){
                         window.document.getElementById("diabetesText").style.color="red";
                         diabetesTextEl.scrollIntoView({block: "center", inline: "center"});

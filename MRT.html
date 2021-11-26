@@ -869,16 +869,16 @@
             // window.document.getElementById("videoCheck").style.display = "block";
         }
         function loadDataInHand(){
-            window.document.getElementById("PregnancyNo").checked = true;
-            window.document.getElementById("iodineNo").checked = true;
-            window.document.getElementById("AllergyNo").checked = true;
-            window.document.getElementById("PathologyNo").checked = true;
-            window.document.getElementById("glandsNo").checked = true;
-            window.document.getElementById("diabetesNo").checked = true;
-            window.document.getElementById("contrastingNo").checked = true;
-            window.document.getElementById("NeperenosNo").checked = true;
-            window.document.getElementById("EpilepsNo").checked = true;
-            window.document.getElementById("DvePoloskiNo").checked = true;
+            // window.document.getElementById("PregnancyNo").checked = true;
+            // window.document.getElementById("iodineNo").checked = true;
+            // window.document.getElementById("AllergyNo").checked = true;
+            // window.document.getElementById("PathologyNo").checked = true;
+            // window.document.getElementById("glandsNo").checked = true;
+            // window.document.getElementById("diabetesNo").checked = true;
+            // window.document.getElementById("contrastingNo").checked = true;
+            // window.document.getElementById("NeperenosNo").checked = true;
+            // window.document.getElementById("EpilepsNo").checked = true;
+            // window.document.getElementById("DvePoloskiNo").checked = true;
 
 
             checkJalobu();
@@ -1100,6 +1100,16 @@
                  window.document.getElementById("MRTtextContrast").style.color="black";
                  window.document.getElementById("SignText").style.color="black";
 
+                 window.document.getElementById("PregnancyText").style.color="black";
+                 window.document.getElementById("iodineText").style.color="black";
+                 window.document.getElementById("AllergyText").style.color="black";
+                 window.document.getElementById("glandsText").style.color="black";
+                 window.document.getElementById("contrastingText").style.color="black";
+                 window.document.getElementById("PathologyText").style.color="black";
+                 window.document.getElementById("diabetesText").style.color="black";
+                 window.document.getElementById("Neperenos").style.color="black";
+                 window.document.getElementById("Epileps").style.color="black";
+                 window.document.getElementById("DvePoloski").style.color="black";
 
                 var r3 = window.document.getElementById("thirdCheck");
                 var r4 = window.document.getElementById("fourthCheck");
@@ -1163,34 +1173,51 @@
                 }
                 else {
                     cancelFunc();
-                    if(!r10.checked && !r10_1.checked){
-                        window.document.getElementById("diabetesText").style.color="red";
-                        diabetesTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
-                    if(!r9.checked && !r9_1.checked){
-                        window.document.getElementById("glandsText").style.color="red";
-                        glandsTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
-                    if(!r8.checked && !r8_1.checked){
-                        window.document.getElementById("PathologyText").style.color="red";
-                        PathologyTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
-                    if(!r7.checked && !r7_1.checked){
-                        window.document.getElementById("AllergyText").style.color="red";
-                        AllergyTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
-                    if(!r6.checked && !r6_1.checked){
-                        window.document.getElementById("iodineText").style.color="red";
-                        iodineTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
-                    if(!r5.checked && !r5_1.checked){
-                        window.document.getElementById("PregnancyText").style.color="red";
-                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
-                    }
                     if(!r3.checked){
                         window.document.getElementById("thirdText").style.backgroundColor="#ff0852";
                         window.document.getElementById("thirdText2").style.backgroundColor="#ff0852";
                         thirdTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+
+                    if(!r17.checked && !r17_1.checked){
+                        window.document.getElementById("DvePoloski").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r16.checked && !r16_1.checked){
+                        window.document.getElementById("Epileps").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r15.checked && !r15_1.checked){
+                        window.document.getElementById("Neperenos").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r11.checked && !r11_1.checked){
+                        window.document.getElementById("contrastingText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r10.checked && !r10_1.checked){
+                        window.document.getElementById("diabetesText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r9.checked && !r9_1.checked){
+                        window.document.getElementById("glandsText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r8.checked && !r8_1.checked){
+                        window.document.getElementById("PathologyText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r7.checked && !r7_1.checked){
+                        window.document.getElementById("AllergyText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r6.checked && !r6_1.checked){
+                        window.document.getElementById("iodineText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
+                    }
+                    if(!r5.checked && !r5_1.checked){
+                        window.document.getElementById("PregnancyText").style.color="red";
+                        PregnancyTextEl.scrollIntoView({block: "center", inline: "center"});
                     }
 
                     if(!r4.checked){
@@ -1538,7 +1565,7 @@
             </tr>
 
             <tr class="heading" >
-                <td style="background:#fc6719;color: white">Обязательное соглашение</td>
+                <td style="background:#fc6719;color: white" >Обязательное соглашение</td>
 
                 <td style="background:#fc6719;color: white">№3</td>
             </tr>
